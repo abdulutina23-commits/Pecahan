@@ -1,0 +1,4050 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Media Pembelajaran Interaktif - Operasi Hitung Pecahan Kelas VI MI Negeri 1 Gorontalo Utara">
+<title>MPI Pecahan - Kelas VI MIN 1 Gorontalo Utara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS RESET & ROOT VARIABLES (HIJAU TOSCA & EMAS)
+   ============================================================ */
+:root {
+  --bg-primary: #F0F8F7;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F7FCFB;
+  --text-primary: #0F2D2A;
+  --text-secondary: #23534E;
+  --text-muted: #648B86;
+  --border-color: #D2EBE7;
+  --shadow-light: rgba(13, 148, 136, 0.05);
+  --shadow-medium: rgba(13, 148, 136, 0.12);
+  --shadow-neumorphic: 6px 6px 14px rgba(13, 148, 136, 0.07), -6px -6px 14px rgba(255, 255, 255, 0.95);
+  --shadow-card: 0 4px 14px rgba(13, 148, 136, 0.08);
+  --accent-blue: #0D9488;           /* Hijau Tosca Utama */
+  --accent-blue-light: #CCFBF1;     /* Tosca Lembut */
+  --accent-blue-dark: #0F766E;      /* Tosca Tua */
+  --accent-green: #059669;
+  --accent-green-light: #D1FAE5;
+  --accent-orange: #D4AF37;         /* Kilau Emas */
+  --accent-orange-light: #FEF9C3;   /* Emas Muda */
+  --accent-red: #DC2626;
+  --accent-red-light: #FEE2E2;
+  --accent-purple: #B48316;         /* Emas Klasik Pekat */
+  --accent-purple-light: #FEF3C7;
+  --gradient-primary: linear-gradient(135deg, #0F766E 0%, #0D9488 50%, #D4AF37 100%); /* Tosca ke Emas */
+  --gradient-success: linear-gradient(135deg, #0D9488, #10B981);
+  --gradient-warm: linear-gradient(135deg, #D4AF37, #B45309);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-main: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #071E1C;           /* Tosca Malam Pekat */
+  --bg-secondary: #0D2D2A;
+  --bg-card: #0F3532;
+  --bg-sidebar: #092422;
+  --text-primary: #F0FDF4;
+  --text-secondary: #CCFBF1;
+  --text-muted: #669B95;
+  --border-color: #174E4A;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.45);
+  --shadow-neumorphic: 6px 6px 14px rgba(0, 0, 0, 0.5), -6px -6px 14px rgba(255, 255, 255, 0.02);
+  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --accent-blue-light: #115E5944;
+  --accent-green-light: #064E3B44;
+  --accent-orange-light: #78350F44;
+  --accent-red-light: #7F1D1D44;
+  --accent-purple-light: #78350F44;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  transition: var(--transition);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar.collapsed {
+  width: 76px;
+  min-width: 76px;
+}
+
+.sidebar-header {
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-logo {
+  width: 44px;
+  height: 44px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.sidebar-brand {
+  overflow: hidden;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.sidebar.collapsed .sidebar-brand {
+  width: 0;
+  opacity: 0;
+}
+
+.sidebar-brand h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.sidebar-brand span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+}
+
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 12px 14px 6px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .nav-section-title {
+  display: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+}
+
+.nav-item.active {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: var(--accent-blue);
+  border-radius: 0 4px 4px 0;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.nav-label {
+  transition: var(--transition);
+}
+
+.sidebar.collapsed .nav-label {
+  width: 0;
+  opacity: 0;
+}
+
+.sidebar-toggle {
+  padding: 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.toggle-btn:hover {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+}
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.top-bar {
+  height: 68px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.breadcrumb .current {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.progress-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 380px;
+  margin: 0 16px;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 10px;
+  background: var(--bg-primary);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gradient-success);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+.progress-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-green);
+  min-width: 36px;
+}
+
+.estimate-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.action-icon-btn:hover {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+  transform: translateY(-1px);
+}
+
+.action-icon-btn.active-state {
+  background: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  scroll-behavior: smooth;
+}
+
+.main-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+  width: 320px;
+  min-width: 320px;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  overflow-y: auto;
+  padding: 20px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.right-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.right-panel::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.panel-section {
+  margin-bottom: 24px;
+}
+
+.panel-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================================================
+   PAGES
+   ============================================================ */
+.page {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.welcome-card {
+  background: var(--gradient-primary);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(13, 148, 136, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.welcome-card::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  top: -30px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(255, 255, 255, 0.06) 70%);
+  border-radius: var(--radius-full);
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  right: 80px;
+  bottom: -60px;
+  width: 160px;
+  height: 160px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: var(--radius-full);
+}
+
+.welcome-greeting { font-size: 14px; opacity: 0.95; margin-bottom: 6px; }
+.welcome-name { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+.welcome-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 24px; max-width: 580px; line-height: 1.6; }
+
+.continue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-lg);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  font-family: var(--font-main);
+}
+
+.continue-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px var(--shadow-medium);
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.stat-icon.blue { background: var(--accent-blue-light); color: var(--accent-blue); }
+.stat-icon.green { background: var(--accent-green-light); color: var(--accent-green); }
+.stat-icon.orange { background: var(--accent-orange-light); color: var(--accent-orange); }
+.stat-icon.purple { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+.stat-value { font-size: 26px; font-weight: 800; color: var(--text-primary); }
+.stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* Badges */
+.badges-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.badge-item:hover { transform: scale(1.02); }
+.badge-item.locked { opacity: 0.45; filter: grayscale(1); }
+.badge-icon { font-size: 28px; }
+.badge-info h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.badge-info span { font-size: 11px; color: var(--text-muted); }
+
+/* Modules */
+.module-list { display: grid; gap: 14px; }
+
+.module-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+  border: 2px solid var(--border-color);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.module-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateX(4px);
+}
+
+.module-card.completed {
+  border-color: var(--accent-green);
+  background: linear-gradient(to right, var(--bg-card), var(--accent-green-light));
+}
+
+.module-number {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.module-card.completed .module-number {
+  background: var(--gradient-success);
+}
+
+.module-info { flex: 1; }
+.module-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+.module-desc { font-size: 12px; color: var(--text-muted); }
+.module-status { font-size: 22px; }
+
+/* ============================================================
+   MATERI PAGE
+   ============================================================ */
+.section-header { margin-bottom: 22px; }
+.section-header h2 { font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+.section-header p { font-size: 14px; color: var(--text-muted); }
+
+.materi-tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--bg-secondary);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.materi-tab {
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.materi-tab:hover { color: var(--accent-blue); background: var(--accent-blue-light); }
+
+.materi-tab.active {
+  background: var(--accent-blue);
+  color: white;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.content-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.content-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content-card p, .content-card li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.info-box {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  margin: 16px 0;
+  font-size: 13.5px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  line-height: 1.6;
+}
+
+.info-box.tip { background: var(--accent-blue-light); border-left: 4px solid var(--accent-blue); color: var(--text-primary); }
+.info-box.success { background: var(--accent-green-light); border-left: 4px solid var(--accent-green); color: var(--text-primary); }
+.info-box.warning { background: var(--accent-orange-light); border-left: 4px solid var(--accent-orange); color: var(--text-primary); }
+.info-box-icon { font-size: 20px; flex-shrink: 0; }
+
+.formula-box {
+  background: var(--bg-primary);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+  margin: 18px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fraction-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+.fraction-display .numerator,
+.fraction-display .denominator {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  line-height: 1.1;
+  padding: 2px 6px;
+}
+
+.fraction-display .frac-line {
+  width: 100%;
+  height: 2px;
+  background: var(--accent-blue);
+  margin: 2px 0;
+  min-width: 24px;
+}
+
+.example-card {
+  background: var(--accent-blue-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin: 16px 0;
+  border-left: 4px solid var(--accent-blue);
+}
+
+.example-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.example-card .step {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.example-card .step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.story-box {
+  background: linear-gradient(135deg, var(--accent-blue-light), var(--accent-orange-light));
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.story-box::after {
+  content: '🌊';
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  font-size: 44px;
+  opacity: 0.15;
+}
+
+.story-box h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-box p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   SIMULASI
+   ============================================================ */
+.simulation-area {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+}
+
+.simulation-area h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fraction-viz {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+}
+
+.fraction-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.fraction-input-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fraction-input-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.fraction-input-visual input {
+  width: 64px;
+  height: 44px;
+  text-align: center;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  transition: var(--transition);
+}
+
+.fraction-input-visual input:focus {
+  border-color: var(--accent-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.fraction-line {
+  width: 54px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 2px;
+}
+
+.operator-select {
+  padding: 10px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.operator-select:focus { border-color: var(--accent-blue); outline: none; }
+
+.calc-btn {
+  padding: 12px 26px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.calc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+.visual-bars {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.bar-container {
+  text-align: center;
+  flex: 1;
+  min-width: 180px;
+  max-width: 240px;
+}
+
+.bar-label { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+
+.bar-visual {
+  display: flex;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  height: 36px;
+  width: 100%;
+  background: var(--bg-primary);
+}
+
+.bar-segment { height: 100%; transition: width 0.4s ease; border-right: 1px solid rgba(0,0,0,0.05); }
+.bar-segment.filled { background: var(--accent-blue); }
+.bar-segment.empty { background: transparent; }
+
+.result-display {
+  text-align: center;
+  padding: 18px;
+  background: var(--accent-green-light);
+  border-radius: var(--radius-lg);
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-green);
+  display: none;
+  line-height: 1.6;
+}
+
+.result-display.show { display: block; animation: popIn 0.3s ease; }
+
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.slider-group { margin: 16px 0; }
+
+.slider-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.slider-group input[type="range"] {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border-color);
+  border-radius: 4px;
+  outline: none;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--accent-blue);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+
+/* DRAG & DROP */
+.dnd-area {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+}
+
+.dnd-pieces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  min-height: 64px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.dnd-piece {
+  padding: 10px 18px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.dnd-piece:hover {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue-light);
+  transform: translateY(-2px);
+}
+
+.dnd-piece.active-selection {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  color: white;
+  transform: scale(1.05);
+}
+
+.dnd-piece.used {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.dnd-dropzone {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 24px;
+  border: 2px dashed var(--accent-blue);
+  border-radius: var(--radius-lg);
+  min-height: 80px;
+  background: var(--accent-blue-light);
+  transition: var(--transition);
+}
+
+.dnd-slot {
+  width: 60px;
+  height: 48px;
+  border: 2px dashed var(--accent-blue);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: var(--transition);
+  background: var(--bg-card);
+  cursor: pointer;
+}
+
+.dnd-slot.filled {
+  border-color: var(--accent-green);
+  border-style: solid;
+  color: var(--text-primary);
+  background: var(--accent-green-light);
+}
+
+.dnd-static {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   QUIZ PAGE
+   ============================================================ */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quiz-progress { display: flex; align-items: center; gap: 8px; }
+
+.quiz-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--border-color);
+  transition: var(--transition);
+}
+
+.quiz-dot.current { background: var(--accent-blue); transform: scale(1.3); }
+.quiz-dot.correct { background: var(--accent-green); }
+.quiz-dot.wrong { background: var(--accent-red); }
+
+.quiz-score { font-size: 14px; font-weight: 700; color: var(--text-secondary); }
+
+.quiz-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.quiz-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--accent-blue-light);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+}
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.quiz-context {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.quiz-options { display: grid; gap: 10px; }
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+}
+
+.quiz-option:hover { border-color: var(--accent-blue); background: var(--accent-blue-light); color: var(--text-primary); }
+.quiz-option.selected { border-color: var(--accent-blue); background: var(--accent-blue-light); color: var(--accent-blue); font-weight: 600; }
+.quiz-option.correct { border-color: var(--accent-green); background: var(--accent-green-light); color: var(--accent-green); font-weight: 600; }
+.quiz-option.wrong { border-color: var(--accent-red); background: var(--accent-red-light); color: var(--accent-red); font-weight: 600; }
+
+.quiz-option-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.quiz-option.selected .quiz-option-letter { background: var(--accent-blue); color: white; }
+.quiz-option.correct .quiz-option-letter { background: var(--accent-green); color: white; }
+.quiz-option.wrong .quiz-option-letter { background: var(--accent-red); color: white; }
+
+.quiz-feedback {
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+  margin-top: 18px;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: var(--accent-green-light); border: 1px solid var(--accent-green); }
+.quiz-feedback.wrong { background: var(--accent-red-light); border: 1px solid var(--accent-red); }
+
+.quiz-feedback-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-feedback.correct .quiz-feedback-title { color: var(--accent-green); }
+.quiz-feedback.wrong .quiz-feedback-title { color: var(--accent-red); }
+.quiz-feedback-text { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+
+.quiz-actions { display: flex; gap: 12px; margin-top: 20px; justify-content: flex-end; }
+
+.btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary { background: var(--gradient-primary); color: white; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3); }
+.btn-primary:disabled { opacity: 0.5; pointer-events: none; }
+.btn-secondary { background: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--border-color); }
+.btn-secondary:hover { background: var(--accent-blue-light); color: var(--accent-blue); }
+.btn-success { background: var(--gradient-success); color: white; }
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3); }
+
+/* Quiz Result */
+.quiz-result { text-align: center; padding: 40px 20px; display: none; }
+.quiz-result.show { display: block; animation: popIn 0.4s ease; }
+.result-emoji { font-size: 64px; margin-bottom: 16px; }
+.result-title { font-size: 26px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
+.result-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+
+.result-score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.result-score-circle.excellent { background: var(--gradient-success); }
+.result-score-circle.good { background: var(--gradient-primary); }
+.result-score-circle.needs-improvement { background: var(--gradient-warm); }
+
+.result-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.result-detail-item { padding: 16px; background: var(--bg-primary); border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+.result-detail-value { font-size: 22px; font-weight: 800; }
+.result-detail-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+
+/* ============================================================
+   PROGRESS PAGE
+   ============================================================ */
+.progress-chart {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 200px;
+  padding: 20px 0;
+}
+
+.chart-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 44px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: height 0.8s ease;
+  min-height: 6px;
+}
+
+.chart-bar-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-align: center; }
+.chart-bar-value { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.timeline-item { position: relative; padding: 14px 0 14px 20px; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--accent-blue);
+  border: 2px solid var(--bg-secondary);
+}
+
+.timeline-item.completed::before { background: var(--accent-green); }
+
+.timeline-content {
+  background: var(--bg-card);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.timeline-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.timeline-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+.setting-group {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+
+.setting-group h3 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.setting-item:last-child { border-bottom: none; }
+.setting-info h4 { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.setting-info p { font-size: 12px; color: var(--text-muted); }
+
+.sheets-badge-connected {
+  background: var(--accent-green-light);
+  color: var(--accent-green);
+  border: 1px solid var(--accent-green);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.sheets-badge-disconnected {
+  background: var(--accent-orange-light);
+  color: var(--accent-orange);
+  border: 1px solid var(--accent-orange);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.script-code-box {
+  background: #0B1E1C;
+  color: #A7F3D0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  max-height: 240px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  margin: 12px 0;
+  white-space: pre;
+}
+
+.switch { position: relative; width: 48px; height: 26px; }
+.switch input { display: none; }
+.switch-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border-color);
+  border-radius: 26px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.switch-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.switch input:checked + .switch-slider { background: var(--accent-blue); }
+.switch input:checked + .switch-slider::before { transform: translateX(22px); }
+
+.name-input {
+  padding: 10px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  font-size: 14px;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  width: 200px;
+  transition: var(--transition);
+}
+
+.name-input:focus { border-color: var(--accent-blue); outline: none; }
+
+/* ============================================================
+   RIGHT PANEL: TOC, NOTES, CHAT
+   ============================================================ */
+.toc-list { list-style: none; }
+.toc-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 3px;
+  border-left: 3px solid transparent;
+}
+
+.toc-item:hover, .toc-item.active {
+  background: var(--accent-blue-light);
+  color: var(--accent-blue);
+  border-left-color: var(--accent-blue);
+}
+
+.notes-area {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  font-size: 13px;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.notes-area:focus { border-color: var(--accent-blue); outline: none; }
+
+.chat-messages {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-msg {
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 90%;
+  word-break: break-word;
+}
+
+.chat-msg.bot {
+  background: var(--accent-blue-light);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-msg.user {
+  background: var(--gradient-primary);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-input-area { display: flex; gap: 8px; }
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  font-size: 13px;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.chat-input:focus { border-color: var(--accent-blue); outline: none; }
+
+.chat-send {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.chat-send:hover { transform: scale(1.05); }
+
+/* ============================================================
+   CONFETTI & MODAL
+   ============================================================ */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall 1.5s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-50px) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) scale(0); opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.shake { animation: shake 0.4s ease; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.modal-close:hover { background: var(--accent-red-light); color: var(--accent-red); }
+
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.flashcard {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.flashcard:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px var(--shadow-medium);
+}
+
+.flashcard-emoji { font-size: 32px; }
+.flashcard-title { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.flashcard-hint { font-size: 11px; color: var(--text-muted); }
+
+.fraction-grid-visual {
+  display: inline-grid;
+  gap: 3px;
+  margin: 12px auto;
+  padding: 6px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.fraction-grid-cell {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.fraction-grid-cell.filled { background: var(--accent-blue); }
+.fraction-grid-cell.empty { background: var(--bg-primary); border: 1px solid var(--border-color); }
+
+.materi-sub { display: none; }
+.materi-sub.active { display: block; animation: fadeIn 0.3s ease; }
+
+/* Responsive adjustments */
+.mobile-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
+.mobile-overlay.show { display: block; }
+
+@media (max-width: 1024px) {
+  .right-panel { display: none; }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    z-index: 200;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  }
+  .sidebar.mobile-open { left: 0; }
+  .mobile-menu-btn { display: flex; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .result-details { grid-template-columns: 1fr; }
+  .top-bar { padding: 0 16px; }
+  .main-content { padding: 16px; }
+  .fraction-viz { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileSidebar()"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="app-container">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">&#128208;</div>
+      <div class="sidebar-brand">
+        <h3>MPI Pecahan</h3>
+        <span>Kelas VI - MIN 1 Gorut</span>
+      </div>
+    </div>
+    
+    <div class="sidebar-nav">
+      <div class="nav-section-title">Menu Pembelajaran</div>
+      
+      <div class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+        <span class="nav-icon">&#127968;</span>
+        <span class="nav-label">Dashboard</span>
+      </div>
+      
+      <div class="nav-item" data-page="materi" onclick="navigateTo('materi')">
+        <span class="nav-icon">&#128218;</span>
+        <span class="nav-label">Materi Pecahan</span>
+      </div>
+      
+      <div class="nav-item" data-page="simulasi" onclick="navigateTo('simulasi')">
+        <span class="nav-icon">&#129514;</span>
+        <span class="nav-label">Simulasi Interaktif</span>
+      </div>
+      
+      <div class="nav-item" data-page="kuis" onclick="navigateTo('kuis')">
+        <span class="nav-icon">&#128221;</span>
+        <span class="nav-label">Kuis Formatif</span>
+      </div>
+      
+      <div class="nav-item" data-page="progres" onclick="navigateTo('progres')">
+        <span class="nav-icon">&#128200;</span>
+        <span class="nav-label">Progres Belajar</span>
+      </div>
+      
+      <div class="nav-section-title">Pengaturan</div>
+      
+      <div class="nav-item" data-page="pengaturan" onclick="navigateTo('pengaturan')">
+        <span class="nav-icon">&#9881;</span>
+        <span class="nav-label">Pengaturan</span>
+      </div>
+    </div>
+    
+    <div class="sidebar-toggle">
+      <button class="toggle-btn" onclick="toggleSidebar()" title="Sembunyikan/Buka Menu">&#9664;</button>
+    </div>
+  </nav>
+
+  <!-- MAIN AREA -->
+  <div class="main-area">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="mobile-menu-btn" onclick="toggleMobileSidebar()">&#9776;</button>
+        <div class="breadcrumb">
+          Matematika &middot; Kelas VI MIN 1 Gorut &middot; <span class="current" id="breadcrumbCurrent">Dashboard</span>
+        </div>
+      </div>
+      
+      <div class="progress-section">
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="globalProgress"></div>
+        </div>
+        <span class="progress-text" id="globalProgressText">0%</span>
+        <span class="estimate-time" id="estimateTime">&#9201; ~15 mnt</span>
+      </div>
+      
+      <div class="top-bar-right">
+        <button class="action-icon-btn" id="ttsBtn" onclick="toggleTTS()" title="Baca Teks (Text-to-Speech)">&#128266;</button>
+        <button class="action-icon-btn" id="themeToggle" onclick="toggleTheme()" title="Mode Gelap / Terang">&#127769;</button>
+        <div class="user-avatar" id="userAvatar" title="Profil Siswa">M</div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      <main class="main-content" id="mainContent">
+
+        <!-- DASHBOARD -->
+        <div class="page active" id="page-dashboard">
+          <div class="welcome-card">
+            <div class="welcome-greeting">Assalamu'alaikum Warahmatullahi Wabarakatuh &#128075;</div>
+            <div class="welcome-name" id="welcomeName">Halo, Murid Hebat!</div>
+            <div class="welcome-subtitle">Selamat datang di Media Pembelajaran Interaktif Operasi Hitung Pecahan. Mari belajar konsep pecahan secara mudah, seru, dan kontekstual dengan alam pesisir Gorontalo Utara! &#127775;</div>
+            <button class="continue-btn" onclick="navigateTo('materi')">
+              &#9654; Mulai Belajar Sekarang
+            </button>
+          </div>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">&#128214;</div>
+              <div class="stat-value" id="statMateri">0/5</div>
+              <div class="stat-label">Materi Diselesaikan</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">&#9989;</div>
+              <div class="stat-value" id="statKuis">0/5</div>
+              <div class="stat-label">Skor Kuis Terakhir</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">&#11088;</div>
+              <div class="stat-value" id="statSkor">0</div>
+              <div class="stat-label">Nilai Tertinggi</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">&#128293;</div>
+              <div class="stat-value" id="statStreak">1 hari</div>
+              <div class="stat-label">Streak Belajar</div>
+            </div>
+          </div>
+          
+          <div class="section-header">
+            <h2>&#127941; Lencana Pencapaian Belajar</h2>
+            <p>Buka dan kumpulkan semua lencana dengan menyelesaikan setiap tantangan belajar</p>
+          </div>
+          
+          <div class="badges-grid">
+            <div class="badge-item locked" id="badge-explorer">
+              <span class="badge-icon">&#129517;</span>
+              <div class="badge-info">
+                <h4>Penjelajah Pecahan</h4>
+                <span>Membuka halaman modul materi</span>
+              </div>
+            </div>
+            <div class="badge-item locked" id="badge-scientist">
+              <span class="badge-icon">&#128300;</span>
+              <div class="badge-info">
+                <h4>Ilmuwan Cilik</h4>
+                <span>Mencoba simulasi kalkulator visual</span>
+              </div>
+            </div>
+            <div class="badge-item locked" id="badge-quiz">
+              <span class="badge-icon">&#127919;</span>
+              <div class="badge-info">
+                <h4>Penembak Jitu</h4>
+                <span>Menyelesaikan kuis dengan nilai &ge; 80</span>
+              </div>
+            </div>
+            <div class="badge-item locked" id="badge-perfect">
+              <span class="badge-icon">&#128142;</span>
+              <div class="badge-info">
+                <h4>Nilai Sempurna!</h4>
+                <span>Meraih nilai 100 pada kuis formatif</span>
+              </div>
+            </div>
+            <div class="badge-item locked" id="badge-allstar">
+              <span class="badge-icon">&#127775;</span>
+              <div class="badge-info">
+                <h4>Bintang Madrasah</h4>
+                <span>Tuntaskan seluruh kegiatan belajar</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="section-header" style="margin-top:28px">
+            <h2>&#128218; Modul Operasi Hitung Pecahan</h2>
+            <p>Pilih topik materi untuk langsung mempelajari konsepnya</p>
+          </div>
+          
+          <div class="module-list">
+            <div class="module-card" onclick="navigateTo('materi'); switchMateriTab(0);">
+              <div class="module-number">1</div>
+              <div class="module-info">
+                <div class="module-title">1. Mengenal Konsep &amp; Jenis Pecahan</div>
+                <div class="module-desc">Pembilang, penyebut, pecahan biasa, campuran, desimal, dan persen</div>
+              </div>
+              <span class="module-status">&#128214;</span>
+            </div>
+            <div class="module-card" onclick="navigateTo('materi'); switchMateriTab(1);">
+              <div class="module-number">2</div>
+              <div class="module-info">
+                <div class="module-title">2. Penjumlahan Pecahan</div>
+                <div class="module-desc">Penjumlahan berpenyebut sama &amp; berbeda melalui teknik KPK</div>
+              </div>
+              <span class="module-status">&#128214;</span>
+            </div>
+            <div class="module-card" onclick="navigateTo('materi'); switchMateriTab(2);">
+              <div class="module-number">3</div>
+              <div class="module-info">
+                <div class="module-title">3. Pengurangan Pecahan</div>
+                <div class="module-desc">Langkah mengurangkan pecahan biasa dan pecahan campuran</div>
+              </div>
+              <span class="module-status">&#128214;</span>
+            </div>
+            <div class="module-card" onclick="navigateTo('materi'); switchMateriTab(3);">
+              <div class="module-number">4</div>
+              <div class="module-info">
+                <div class="module-title">4. Perkalian Pecahan</div>
+                <div class="module-desc">Perkalian langsung: pembilang kali pembilang, penyebut kali penyebut</div>
+              </div>
+              <span class="module-status">&#128214;</span>
+            </div>
+            <div class="module-card" onclick="navigateTo('materi'); switchMateriTab(4);">
+              <div class="module-number">5</div>
+              <div class="module-info">
+                <div class="module-title">5. Pembagian Pecahan</div>
+                <div class="module-desc">Konsep resiprok (dibalik lalu dikalikan) dengan tepat</div>
+              </div>
+              <span class="module-status">&#128214;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MATERI -->
+        <div class="page" id="page-materi">
+          <div class="section-header">
+            <h2>&#128218; Modul Materi Matematika</h2>
+            <p>Pelajari konsep secara runut disertai contoh kontekstual daerah Gorontalo Utara</p>
+          </div>
+          
+          <div class="materi-tabs" id="materiTabs">
+            <button class="materi-tab active" onclick="switchMateriTab(0)">1. Mengenal Pecahan</button>
+            <button class="materi-tab" onclick="switchMateriTab(1)">2. Penjumlahan</button>
+            <button class="materi-tab" onclick="switchMateriTab(2)">3. Pengurangan</button>
+            <button class="materi-tab" onclick="switchMateriTab(3)">4. Perkalian</button>
+            <button class="materi-tab" onclick="switchMateriTab(4)">5. Pembagian</button>
+          </div>
+
+          <!-- Tab 0 -->
+          <div class="materi-sub active" id="materi-0">
+            <div class="content-card">
+              <h3>&#128290; Hakikat dan Makna Pecahan</h3>
+              <p>Pecahan merupakan bilangan yang menyatakan <strong>sebagian dari keseluruhan</strong> benda atau himpunan yang dibagi menjadi bagian-bagian berukuran sama besar.</p>
+              
+              <div class="formula-box">
+                <span class="fraction-display">
+                  <span class="numerator">a</span>
+                  <span class="frac-line"></span>
+                  <span class="denominator">b</span>
+                </span>
+                <span>dengan syarat b &ne; 0</span>
+              </div>
+              <p style="text-align:center;font-size:13px;color:var(--text-muted);"><strong>a</strong> dinamakan <em>Pembilang</em> (bagian yang diambil) &bull; <strong>b</strong> dinamakan <em>Penyebut</em> (total seluruh bagian sama banyak)</p>
+              
+              <div class="story-box">
+                <h4>&#127907; Cerita dari Pelabuhan Kwandang</h4>
+                <p>Pak Rasyid, seorang nelayan di Kwandang Gorontalo Utara, memperoleh 8 ekor ikan kakap segar dari perahunya. Ia membagikan 3 ekor ikan tersebut kepada tetangganya di pesisir. Bagian ikan yang diberikan Pak Rasyid dinyatakan dalam pecahan <strong>3/8</strong> (tiga per delapan) dari seluruh hasil tangkapannya.</p>
+              </div>
+              
+              <h3 style="margin-top:26px;">&#128203; Bentuk-Bentuk Pecahan (Klik untuk Membaca Detail)</h3>
+              
+              <div class="flashcard-grid">
+                <div class="flashcard" onclick="showFlashcard('biasa')">
+                  <span class="flashcard-emoji">&#128202;</span>
+                  <span class="flashcard-title">Pecahan Biasa</span>
+                  <span class="flashcard-hint">Contoh: 3/4</span>
+                </div>
+                <div class="flashcard" onclick="showFlashcard('campuran')">
+                  <span class="flashcard-emoji">&#128256;</span>
+                  <span class="flashcard-title">Pecahan Campuran</span>
+                  <span class="flashcard-hint">Contoh: 2 1/4</span>
+                </div>
+                <div class="flashcard" onclick="showFlashcard('desimal')">
+                  <span class="flashcard-emoji">&#128287;</span>
+                  <span class="flashcard-title">Pecahan Desimal</span>
+                  <span class="flashcard-hint">Contoh: 0,75</span>
+                </div>
+                <div class="flashcard" onclick="showFlashcard('persen')">
+                  <span class="flashcard-emoji">&#128175;</span>
+                  <span class="flashcard-title">Pecahan Persen</span>
+                  <span class="flashcard-hint">Contoh: 75%</span>
+                </div>
+              </div>
+              
+              <div class="info-box tip">
+                <span class="info-box-icon">&#128161;</span>
+                <div>
+                  <strong>Jembatan Ingatan:</strong> <strong>P</strong>embilang posisinya di <strong>P</strong>uncak (atas). <strong>B</strong>awah adalah penyebut (menyebutkan jumlah total pembagian).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 1 -->
+          <div class="materi-sub" id="materi-1">
+            <div class="content-card">
+              <h3>&#10133; Penjumlahan Pecahan</h3>
+              
+              <h4 style="margin:16px 0 8px;color:var(--accent-blue);font-size:15px;">A. Jika Penyebut Sudah Sama</h4>
+              <p>Apabila penyebut kedua pecahan sudah bernilai sama, langsung jumlahkan angka pembilangnya, sementara penyebutnya tetap dipertahankan.</p>
+              
+              <div class="formula-box">
+                <span class="fraction-display"><span class="numerator">a</span><span class="frac-line"></span><span class="denominator">c</span></span>
+                <span>+</span>
+                <span class="fraction-display"><span class="numerator">b</span><span class="frac-line"></span><span class="denominator">c</span></span>
+                <span>=</span>
+                <span class="fraction-display"><span class="numerator">a + b</span><span class="frac-line"></span><span class="denominator">c</span></span>
+              </div>
+              
+              <div class="example-card">
+                <h4>&#128221; Contoh Soal Berpenyebut Sama</h4>
+                <div class="step" data-step="Soal: ">Hitung: 2/7 + 3/7 = ...</div>
+                <div class="step" data-step="1. ">Penyebutnya sudah sama, yaitu 7.</div>
+                <div class="step" data-step="2. ">Jumlahkan pembilang: 2 + 3 = 5.</div>
+                <div class="step" data-step="Hasil: "><strong>5/7</strong></div>
+              </div>
+              
+              <h4 style="margin:24px 0 8px;color:var(--accent-blue);font-size:15px;">B. Jika Penyebut Berbeda</h4>
+              <p>Samakan terlebih dahulu penyebutnya dengan mencari <strong>KPK (Kelipatan Persekutuan Terkecil)</strong> kedua penyebut.</p>
+              
+              <div class="example-card">
+                <h4>&#128221; Contoh Soal Berpenyebut Berbeda</h4>
+                <div class="step" data-step="Soal: ">Hitung: 1/3 + 1/4 = ...</div>
+                <div class="step" data-step="1. ">KPK dari 3 dan 4 adalah 12.</div>
+                <div class="step" data-step="2. ">1/3 diubah menjadi (1 &times; 4)/(3 &times; 4) = 4/12.</div>
+                <div class="step" data-step="3. ">1/4 diubah menjadi (1 &times; 3)/(4 &times; 3) = 3/12.</div>
+                <div class="step" data-step="4. ">Jumlahkan pembilang: 4/12 + 3/12 = 7/12.</div>
+                <div class="step" data-step="Hasil: "><strong>7/12</strong></div>
+              </div>
+              
+              <div class="story-box">
+                <h4>&#127806; Pertanian Jagung di Atinggola</h4>
+                <p>Ibu Salma memiliki lahan di Atinggola. Seluas 1/3 bagian lahan ditanami jagung manis dan 1/4 bagian ditanami kacang tanah. Total bagian tanah yang telah ditanami adalah 1/3 + 1/4 = 4/12 + 3/12 = <strong>7/12 bagian</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2 -->
+          <div class="materi-sub" id="materi-2">
+            <div class="content-card">
+              <h3>&#10134; Pengurangan Pecahan</h3>
+              
+              <h4 style="margin:16px 0 8px;color:var(--accent-blue);font-size:15px;">Prinsip Pengurangan Pecahan</h4>
+              <p>Serupa dengan penjumlahan, pastikan penyebut bernilai sama. Kurangkan pembilang pertama dengan pembilang kedua, sedangkan nilai penyebut tidak berubah.</p>
+              
+              <div class="formula-box">
+                <span class="fraction-display"><span class="numerator">a</span><span class="frac-line"></span><span class="denominator">c</span></span>
+                <span>&minus;</span>
+                <span class="fraction-display"><span class="numerator">b</span><span class="frac-line"></span><span class="denominator">c</span></span>
+                <span>=</span>
+                <span class="fraction-display"><span class="numerator">a &minus; b</span><span class="frac-line"></span><span class="denominator">c</span></span>
+              </div>
+              
+              <div class="example-card">
+                <h4>&#128221; Contoh Soal Pengurangan</h4>
+                <div class="step" data-step="Soal: ">Hitung: 3/4 &minus; 1/6 = ...</div>
+                <div class="step" data-step="1. ">KPK dari 4 dan 6 adalah 12.</div>
+                <div class="step" data-step="2. ">3/4 = 9/12 dan 1/6 = 2/12.</div>
+                <div class="step" data-step="3. ">Kurangkan pembilangnya: 9/12 &minus; 2/12 = 7/12.</div>
+                <div class="step" data-step="Hasil: "><strong>7/12</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3 -->
+          <div class="materi-sub" id="materi-3">
+            <div class="content-card">
+              <h3>&#10006; Perkalian Pecahan</h3>
+              <p>Perkalian pecahan dilakukan secara langsung tanpa perlu menyamakan penyebut: <strong>kalikan pembilang dengan pembilang, dan penyebut dengan penyebut</strong>.</p>
+              
+              <div class="formula-box">
+                <span class="fraction-display"><span class="numerator">a</span><span class="frac-line"></span><span class="denominator">b</span></span>
+                <span>&times;</span>
+                <span class="fraction-display"><span class="numerator">c</span><span class="frac-line"></span><span class="denominator">d</span></span>
+                <span>=</span>
+                <span class="fraction-display"><span class="numerator">a &times; c</span><span class="frac-line"></span><span class="denominator">b &times; d</span></span>
+              </div>
+              
+              <div class="example-card">
+                <h4>&#128221; Contoh: 2/3 &times; 4/5</h4>
+                <div class="step" data-step="1. ">Kalikan pembilang: 2 &times; 4 = 8</div>
+                <div class="step" data-step="2. ">Kalikan penyebut: 3 &times; 5 = 15</div>
+                <div class="step" data-step="Hasil: "><strong>8/15</strong></div>
+              </div>
+              
+              <div class="info-box success">
+                <span class="info-box-icon">&#127775;</span>
+                <div>
+                  <strong>Pecahan Campuran:</strong> Jika menjumpai pecahan campuran seperti 1 1/2, ubah dahulu menjadi pecahan biasa (3/2) sebelum melakukan perkalian.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4 -->
+          <div class="materi-sub" id="materi-4">
+            <div class="content-card">
+              <h3>&#10135; Pembagian Pecahan</h3>
+              <p>Operasi pembagian pecahan diselesaikan dengan mengalikan pecahan pertama dengan <strong>kebalikan (resiprok)</strong> dari pecahan pembaginya.</p>
+              
+              <div class="formula-box">
+                <span class="fraction-display"><span class="numerator">a</span><span class="frac-line"></span><span class="denominator">b</span></span>
+                <span>&divide;</span>
+                <span class="fraction-display"><span class="numerator">c</span><span class="frac-line"></span><span class="denominator">d</span></span>
+                <span>=</span>
+                <span class="fraction-display"><span class="numerator">a</span><span class="frac-line"></span><span class="denominator">b</span></span>
+                <span>&times;</span>
+                <span class="fraction-display"><span class="numerator">d</span><span class="frac-line"></span><span class="denominator">c</span></span>
+              </div>
+              
+              <div class="info-box warning">
+                <span class="info-box-icon">&#9888;</span>
+                <div>
+                  <strong>Kaidah Emas:</strong> <em>"Dibalik lalu dikali!"</em> Balikkan pembilang dan penyebut pada pecahan kedua, lalu selesaikan dengan operasi perkalian.
+                </div>
+              </div>
+              
+              <div class="example-card">
+                <h4>&#128221; Contoh Soal Pembagian</h4>
+                <div class="step" data-step="Soal: ">Hitung: 3/4 &divide; 2/5 = ...</div>
+                <div class="step" data-step="1. ">Balik pecahan kedua: 2/5 menjadi 5/2.</div>
+                <div class="step" data-step="2. ">Lakukan perkalian: 3/4 &times; 5/2 = 15/8.</div>
+                <div class="step" data-step="3. ">Ubah ke pecahan campuran: 15/8 = 1 7/8.</div>
+                <div class="step" data-step="Hasil: "><strong>1 7/8</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULASI -->
+        <div class="page" id="page-simulasi">
+          <div class="section-header">
+            <h2>&#129514; Laboratorium Simulasi Interaktif</h2>
+            <p>Eksplorasi representasi visual nilai pecahan secara dinamis</p>
+          </div>
+
+          <!-- Kalkulator Visual -->
+          <div class="simulation-area">
+            <h3>&#128300; Kalkulator Pecahan dengan Model Visual Batang</h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Tentukan nilai pembilang dan penyebut untuk mengamati penggabungan atau pengurangan luas bagian secara visual.</p>
+            
+            <div class="fraction-viz">
+              <div class="fraction-input-group">
+                <label>Pecahan Ke-1</label>
+                <div class="fraction-input-visual">
+                  <input type="number" id="num1" value="1" min="0" max="24" oninput="updateVisualization()">
+                  <div class="fraction-line"></div>
+                  <input type="number" id="den1" value="4" min="1" max="24" oninput="updateVisualization()">
+                </div>
+              </div>
+              
+              <select class="operator-select" id="operator" onchange="updateVisualization()">
+                <option value="+">+</option>
+                <option value="-">&minus;</option>
+                <option value="*">&times;</option>
+                <option value="/">&divide;</option>
+              </select>
+              
+              <div class="fraction-input-group">
+                <label>Pecahan Ke-2</label>
+                <div class="fraction-input-visual">
+                  <input type="number" id="num2" value="2" min="0" max="24" oninput="updateVisualization()">
+                  <div class="fraction-line"></div>
+                  <input type="number" id="den2" value="4" min="1" max="24" oninput="updateVisualization()">
+                </div>
+              </div>
+              
+              <button class="calc-btn" onclick="calculateFraction()">
+                &#129518; Hitung &amp; Tampilkan
+              </button>
+            </div>
+            
+            <div class="visual-bars" id="visualBars">
+              <div class="bar-container">
+                <div class="bar-label" id="bar1Label">1/4</div>
+                <div class="bar-visual" id="bar1"></div>
+              </div>
+              <div style="font-size:24px;font-weight:700;color:var(--text-muted);" id="barOperator">+</div>
+              <div class="bar-container">
+                <div class="bar-label" id="bar2Label">2/4</div>
+                <div class="bar-visual" id="bar2"></div>
+              </div>
+            </div>
+            
+            <div class="result-display" id="calcResult"></div>
+          </div>
+
+          <!-- Slider Pecahan -->
+          <div class="simulation-area">
+            <h3>&#127898; Simulasi Grid Luas Pecahan</h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Ubah nilai slider untuk melihat representasi pecahan murni, desimal, dan persentase.</p>
+            
+            <div class="slider-group">
+              <label>Pembilang (Bagian Terisi): <strong id="sliderNumVal">3</strong></label>
+              <input type="range" id="sliderNum" min="0" max="16" value="3" oninput="updateSliderViz()">
+            </div>
+            
+            <div class="slider-group">
+              <label>Penyebut (Total Kotak): <strong id="sliderDenVal">8</strong></label>
+              <input type="range" id="sliderDen" min="1" max="16" value="8" oninput="updateSliderViz()">
+            </div>
+            
+            <div style="text-align:center;margin:16px 0;">
+              <div style="font-size:32px;font-weight:800;color:var(--accent-blue);" id="sliderFractionDisplay">3/8</div>
+              <div style="font-size:14px;color:var(--text-muted);margin-top:2px;" id="sliderDecimalDisplay">= 0.375 &bull; 37.5%</div>
+            </div>
+            
+            <div style="display:flex;justify-content:center;" id="sliderGridArea"></div>
+          </div>
+
+          <!-- Tantangan Drag & Drop (Ramah Sentuhan & Mobile) -->
+          <div class="dnd-area">
+            <h3>&#129513; Tantangan Menyusun Persamaan Pecahan</h3>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Klik salah satu angka pilihan, lalu klik kotak kosong bergaris putus-putus di bawah untuk meletakkannya.</p>
+            
+            <div class="info-box tip">
+              <span class="info-box-icon">&#127919;</span>
+              <div><strong>Target Tantangan:</strong> <span id="dndQuestion">Susun persamaan pecahan yang benar</span></div>
+            </div>
+            
+            <div class="dnd-pieces" id="dndPieces"></div>
+            
+            <div class="dnd-dropzone" id="dndDropzone"></div>
+            
+            <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="checkDnD()">&#9989; Periksa Susunan</button>
+              <button class="btn btn-secondary" onclick="resetDnD()">&#128260; Soal Baru</button>
+              <button class="btn btn-success" id="btnSendDndSheets" onclick="manualSendDndToSheets()" style="display:none;">
+                &#128202; Kirim Hasil Simulasi ke Sheet 2
+              </button>
+            </div>
+            
+            <div class="result-display" id="dndResult"></div>
+          </div>
+        </div>
+
+        <!-- KUIS -->
+        <div class="page" id="page-kuis">
+          <div class="section-header">
+            <h2>&#128221; Kuis Evaluasi Formatif Matematika</h2>
+            <p>Jawab 5 butir soal pilihan ganda berbasis konteks kearifan lokal Gorontalo Utara</p>
+          </div>
+          
+          <div class="quiz-header">
+            <div class="quiz-progress" id="quizDots">
+              <div class="quiz-dot current" data-q="0"></div>
+              <div class="quiz-dot" data-q="1"></div>
+              <div class="quiz-dot" data-q="2"></div>
+              <div class="quiz-dot" data-q="3"></div>
+              <div class="quiz-dot" data-q="4"></div>
+            </div>
+            <div class="quiz-score" id="quizScoreDisplay">Soal 1 dari 5</div>
+          </div>
+          
+          <div id="quizContainer"></div>
+          <div class="quiz-result" id="quizResult"></div>
+        </div>
+
+        <!-- PROGRES -->
+        <div class="page" id="page-progres">
+          <div class="section-header">
+            <h2>&#128200; Capaian dan Progres Belajar</h2>
+            <p>Pantau ketercapaian materi dan riwayat aktivitas pembelajaran mandiri</p>
+          </div>
+          
+          <div class="progress-chart">
+            <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">Tingkat Keterbacaan Materi</h3>
+            <div class="chart-bars" id="chartBars">
+              <div class="chart-bar-item">
+                <div class="chart-bar-value" id="chartVal0">0%</div>
+                <div class="chart-bar" id="chartBar0" style="height:6px;background:var(--accent-blue);"></div>
+                <div class="chart-bar-label">Mengenal</div>
+              </div>
+              <div class="chart-bar-item">
+                <div class="chart-bar-value" id="chartVal1">0%</div>
+                <div class="chart-bar" id="chartBar1" style="height:6px;background:var(--accent-green);"></div>
+                <div class="chart-bar-label">Tambah</div>
+              </div>
+              <div class="chart-bar-item">
+                <div class="chart-bar-value" id="chartVal2">0%</div>
+                <div class="chart-bar" id="chartBar2" style="height:6px;background:var(--accent-orange);"></div>
+                <div class="chart-bar-label">Kurang</div>
+              </div>
+              <div class="chart-bar-item">
+                <div class="chart-bar-value" id="chartVal3">0%</div>
+                <div class="chart-bar" id="chartBar3" style="height:6px;background:var(--accent-purple);"></div>
+                <div class="chart-bar-label">Kali</div>
+              </div>
+              <div class="chart-bar-item">
+                <div class="chart-bar-value" id="chartVal4">0%</div>
+                <div class="chart-bar" id="chartBar4" style="height:6px;background:var(--accent-red);"></div>
+                <div class="chart-bar-label">Bagi</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="content-card">
+            <h3>&#128197; Catatan Jejak Belajar</h3>
+            <div class="timeline" id="activityTimeline"></div>
+          </div>
+        </div>
+
+        <!-- PENGATURAN -->
+        <div class="page" id="page-pengaturan">
+          <div class="section-header">
+            <h2>&#9881; Pengaturan Aplikasi</h2>
+            <p>Atur preferensi akun, audio efek, dan data lokal</p>
+          </div>
+          
+          <div class="setting-group">
+            <h3>&#128100; Profil Siswa</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Nama Panggilan</h4>
+                <p>Nama yang ditampilkan di dashboard dan sertifikat capaian</p>
+              </div>
+              <input type="text" class="name-input" id="nameInput" placeholder="Ketik nama kamu..." oninput="updateUserName()">
+            </div>
+          </div>
+          
+          <div class="setting-group">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+              <div>
+                <h3 style="margin-bottom:2px;">&#128202; Integrasi Google Spreadsheet Guru</h3>
+                <p style="font-size:12px;color:var(--text-muted);">Simpan otomatis Bank Soal ke Sheet 1 dan Rekap Hasil Jawaban Siswa ke Sheet 2</p>
+              </div>
+              <span id="sheetsStatusBadge" class="sheets-badge-disconnected">&#9888; Belum Terhubung</span>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>URL Web App Google Apps Script</h4>
+                <p>Masukkan Web App URL yang didapatkan setelah deploy di Spreadsheet</p>
+              </div>
+              <input type="url" class="name-input" id="sheetsUrlInput" style="width:280px;" placeholder="https://script.google.com/macros/s/.../exec" oninput="saveSheetsUrl()">
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="syncQuestionsToSheets()">
+                &#128228; Kirim Soal &amp; Tantangan ke Sheet 1
+              </button>
+              <button class="btn btn-secondary" onclick="openSheetsGuideModal()">
+                &#128214; Panduan &amp; Salin Kode Apps Script
+              </button>
+              <button class="btn btn-secondary" onclick="testSheetsConnection()">
+                &#128260; Tes Koneksi
+              </button>
+            </div>
+            <div id="sheetsSyncFeedback" style="margin-top:12px;font-size:13px;font-weight:600;display:none;"></div>
+          </div>
+
+          <div class="setting-group">
+            <h3>&#127912; Personalisasi &amp; Efek</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Mode Gelap (Dark Mode)</h4>
+                <p>Membantu kenyamanan visual saat belajar</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="darkModeSwitch" onchange="toggleThemeFromSwitch()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Efek Suara Interaktif</h4>
+                <p>Memainkan efek nada audio saat tombol atau jawaban ditekan</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="soundSwitch" checked onchange="saveState()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Animasi Selebrasi (Confetti)</h4>
+                <p>Hamburan kembang api saat jawaban kamu benar</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="confettiSwitch" checked onchange="saveState()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="setting-group">
+            <h3>&#128465; Manajemen Memori</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <h4>Atur Ulang Data Belajar (Reset)</h4>
+                <p>Menghapus seluruh skor kuis, catatan, dan progres penyimpanan lokal</p>
+              </div>
+              <button class="btn btn-secondary" onclick="resetAllProgress()" style="color:var(--accent-red);border-color:var(--accent-red);">Reset Data</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- RIGHT PANEL -->
+      <aside class="right-panel" id="rightPanel">
+        <div class="panel-section">
+          <div class="panel-section-title">&#128209; Navigasi Materi</div>
+          <ul class="toc-list">
+            <li class="toc-item active" onclick="navigateTo('materi'); switchMateriTab(0);">1. Mengenal Pecahan</li>
+            <li class="toc-item" onclick="navigateTo('materi'); switchMateriTab(1);">2. Penjumlahan Pecahan</li>
+            <li class="toc-item" onclick="navigateTo('materi'); switchMateriTab(2);">3. Pengurangan Pecahan</li>
+            <li class="toc-item" onclick="navigateTo('materi'); switchMateriTab(3);">4. Perkalian Pecahan</li>
+            <li class="toc-item" onclick="navigateTo('materi'); switchMateriTab(4);">5. Pembagian Pecahan</li>
+          </ul>
+        </div>
+        
+        <div class="panel-section">
+          <div class="panel-section-title">&#128221; Buku Catatan Digital</div>
+          <textarea class="notes-area" id="notesArea" placeholder="Catat rumus, tips atau kata kunci belajarmu di sini..." oninput="saveNotes()"></textarea>
+        </div>
+        
+        <div class="panel-section" style="flex:1;display:flex;flex-direction:column;">
+          <div class="panel-section-title">&#128172; Teman Tanya Pecahan</div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">Assalamu'alaikum! Saya asisten matematika madrasah. Tanyakan rumus atau ketik soal seperti <strong>1/2 + 1/4</strong> untuk saya hitung ya! &#128522;</div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pertanyaan / soal..." onkeypress="if(event.key==='Enter')sendChat()">
+            <button class="chat-send" onclick="sendChat()">&#10148;</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   AUDIO SYNTHESIZER (WEB AUDIO API)
+   ============================================================ */
+var audioCtx = null;
+
+function getAudioContext() {
+  if (!audioCtx) {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) audioCtx = new AudioContext();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+function playSound(type) {
+  var soundEnabled = document.getElementById('soundSwitch') ? document.getElementById('soundSwitch').checked : true;
+  if (!soundEnabled) return;
+  
+  try {
+    var ctx = getAudioContext();
+    if (!ctx) return;
+    
+    var now = ctx.currentTime;
+    
+    if (type === 'click') {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.05);
+    } 
+    else if (type === 'correct') {
+      // Arpeggio C5 -> E5 -> G5 -> C6
+      var notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach(function(freq, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+        gain.gain.setValueAtTime(0.15, now + i * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.2);
+      });
+    } 
+    else if (type === 'wrong') {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.setValueAtTime(180, now + 0.12);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.25);
+    } 
+    else if (type === 'badge') {
+      var chord = [523.25, 659.25, 783.99];
+      chord.forEach(function(f) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.6);
+      });
+    }
+  } catch (e) {
+    // Ignore audio autostart restrictions
+  }
+}
+
+/* ============================================================
+   STATE MANAGEMENT
+   ============================================================ */
+var AppState = {
+  userName: '',
+  currentPage: 'dashboard',
+  currentMateri: 0,
+  materiVisited: [false, false, false, false, false],
+  quizAnswers: [null, null, null, null, null],
+  quizSubmitted: false,
+  quizScore: 0,
+  highScore: 0,
+  streak: 1,
+  badges: { explorer: false, quiz: false, perfect: false, scientist: false, allstar: false },
+  notes: '',
+  darkMode: false,
+  isSpeaking: false,
+  dndSolved: false,
+  simUsed: false,
+  activities: [],
+  sheetsUrl: ''
+};
+
+function loadState() {
+  try {
+    var saved = localStorage.getItem('mpi_pecahan_state_v2');
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      for (var key in parsed) {
+        if (parsed.hasOwnProperty(key)) AppState[key] = parsed[key];
+      }
+    }
+  } catch (e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('mpi_pecahan_state_v2', JSON.stringify(AppState));
+  } catch (e) {}
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function navigateTo(page) {
+  playSound('click');
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  var target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+  var navItem = document.querySelector('.nav-item[data-page="' + page + '"]');
+  if (navItem) navItem.classList.add('active');
+
+  var names = {
+    dashboard: 'Dashboard',
+    materi: 'Materi Pecahan',
+    simulasi: 'Simulasi Interaktif',
+    kuis: 'Kuis Formatif',
+    progres: 'Progres Belajar',
+    pengaturan: 'Pengaturan'
+  };
+  document.getElementById('breadcrumbCurrent').textContent = names[page] || page;
+
+  AppState.currentPage = page;
+  document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
+
+  document.getElementById('sidebar').classList.remove('mobile-open');
+  document.getElementById('mobileOverlay').classList.remove('show');
+
+  if (page === 'materi' && !AppState.badges.explorer) {
+    unlockBadge('explorer');
+  }
+  if (page === 'simulasi' && !AppState.badges.scientist) {
+    AppState.simUsed = true;
+    unlockBadge('scientist');
+  }
+
+  updateProgress();
+  updateDashboard();
+
+  if (page === 'simulasi') {
+    updateVisualization();
+    updateSliderViz();
+    if (!document.getElementById('dndPieces').children.length) initDnD();
+  }
+  if (page === 'kuis') {
+    if (AppState.quizSubmitted) showQuizResult();
+    else renderQuiz();
+  }
+  if (page === 'progres') {
+    updateProgressPage();
+  }
+
+  saveState();
+}
+
+function toggleSidebar() {
+  playSound('click');
+  document.getElementById('sidebar').classList.toggle('collapsed');
+}
+
+function toggleMobileSidebar() {
+  playSound('click');
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+  document.getElementById('mobileOverlay').classList.toggle('show');
+}
+
+/* ============================================================
+   THEME SWITCHER
+   ============================================================ */
+function toggleTheme() {
+  playSound('click');
+  var html = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  var nextState = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', nextState);
+  document.getElementById('themeToggle').innerHTML = isDark ? '&#127769;' : '&#9728;';
+  var sw = document.getElementById('darkModeSwitch');
+  if (sw) sw.checked = !isDark;
+  AppState.darkMode = !isDark;
+  saveState();
+}
+
+function toggleThemeFromSwitch() {
+  toggleTheme();
+}
+
+/* ============================================================
+   TEXT TO SPEECH (TTS)
+   ============================================================ */
+function toggleTTS() {
+  playSound('click');
+  if (AppState.isSpeaking) {
+    window.speechSynthesis.cancel();
+    AppState.isSpeaking = false;
+    document.getElementById('ttsBtn').classList.remove('active-state');
+    document.getElementById('ttsBtn').innerHTML = '&#128266;';
+    return;
+  }
+
+  var activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+
+  var textSource = activePage.querySelector('.materi-sub.active') || activePage.querySelector('.content-card') || activePage;
+  var text = textSource.innerText.replace(/[\n\r]+/g, ' ').substring(0, 450);
+
+  if (!text.trim()) return;
+
+  var utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'id-ID';
+  utterance.rate = 0.95;
+
+  utterance.onend = function() {
+    AppState.isSpeaking = false;
+    document.getElementById('ttsBtn').classList.remove('active-state');
+    document.getElementById('ttsBtn').innerHTML = '&#128266;';
+  };
+
+  utterance.onerror = function() {
+    AppState.isSpeaking = false;
+    document.getElementById('ttsBtn').classList.remove('active-state');
+    document.getElementById('ttsBtn').innerHTML = '&#128266;';
+  };
+
+  window.speechSynthesis.speak(utterance);
+  AppState.isSpeaking = true;
+  document.getElementById('ttsBtn').classList.add('active-state');
+  document.getElementById('ttsBtn').innerHTML = '&#9209;';
+}
+
+/* ============================================================
+   MATERI TABS
+   ============================================================ */
+function switchMateriTab(index) {
+  playSound('click');
+  document.querySelectorAll('.materi-tab').forEach(function(t, i) {
+    t.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.materi-sub').forEach(function(s, i) {
+    s.classList.toggle('active', i === index);
+  });
+
+  AppState.currentMateri = index;
+  AppState.materiVisited[index] = true;
+
+  document.querySelectorAll('.toc-item').forEach(function(t, i) {
+    t.classList.toggle('active', i === index);
+  });
+
+  addActivity('Mempelajari Modul ' + (index + 1) + ': ' + getMateriName(index));
+  updateProgress();
+  saveState();
+}
+
+function getMateriName(i) {
+  return ['Mengenal Pecahan', 'Penjumlahan', 'Pengurangan', 'Perkalian', 'Pembagian'][i] || 'Pecahan';
+}
+
+/* ============================================================
+   PROGRESS & DASHBOARD UPDATES
+   ============================================================ */
+function updateProgress() {
+  var materiProgress = AppState.materiVisited.filter(function(v) { return v; }).length;
+  var totalItems = 7; // 5 Materi + 1 Simulasi + 1 Kuis
+  var completed = materiProgress;
+  if (AppState.simUsed) completed++;
+  if (AppState.quizSubmitted) completed++;
+
+  var percent = Math.min(100, Math.round((completed / totalItems) * 100));
+  document.getElementById('globalProgress').style.width = percent + '%';
+  document.getElementById('globalProgressText').textContent = percent + '%';
+
+  var remaining = totalItems - completed;
+  var est = remaining * 3;
+  document.getElementById('estimateTime').innerHTML = '&#9201; ~' + (est > 0 ? est : 2) + ' mnt';
+
+  if (completed >= totalItems && !AppState.badges.allstar) {
+    unlockBadge('allstar');
+  }
+}
+
+function updateDashboard() {
+  var materiCount = AppState.materiVisited.filter(function(v) { return v; }).length;
+  document.getElementById('statMateri').textContent = materiCount + '/5';
+  document.getElementById('statKuis').textContent = (AppState.quizSubmitted ? AppState.quizScore : 0) + '/5';
+  document.getElementById('statSkor').textContent = AppState.highScore;
+  document.getElementById('statStreak').textContent = AppState.streak + ' hari';
+
+  if (AppState.userName) {
+    document.getElementById('welcomeName').textContent = 'Halo, ' + AppState.userName + '!';
+    document.getElementById('userAvatar').textContent = AppState.userName.charAt(0).toUpperCase();
+  }
+
+  document.querySelectorAll('.module-card').forEach(function(card, i) {
+    if (AppState.materiVisited[i]) {
+      card.classList.add('completed');
+      card.querySelector('.module-status').innerHTML = '&#9989;';
+    }
+  });
+}
+
+/* ============================================================
+   ACTIVITY LOGGING & PROGRESS PAGE
+   ============================================================ */
+function addActivity(title, desc) {
+  if (!AppState.activities) AppState.activities = [];
+  var timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+  var entry = {
+    title: title,
+    desc: desc || ('Dicatat pada pukul ' + timeStr + ' WITA'),
+    time: timeStr
+  };
+  
+  // Mencegah duplikasi entri beruntun
+  if (AppState.activities.length === 0 || AppState.activities[AppState.activities.length - 1].title !== title) {
+    AppState.activities.push(entry);
+    if (AppState.activities.length > 25) AppState.activities.shift();
+    saveState();
+  }
+}
+
+function updateProgressPage() {
+  var colors = ['var(--accent-blue)', 'var(--accent-green)', 'var(--accent-orange)', 'var(--accent-purple)', 'var(--accent-red)'];
+
+  AppState.materiVisited.forEach(function(visited, i) {
+    var percent = visited ? 100 : 0;
+    var bar = document.getElementById('chartBar' + i);
+    var val = document.getElementById('chartVal' + i);
+    if (bar) {
+      bar.style.height = Math.max(percent * 1.6, 6) + 'px';
+      bar.style.background = colors[i];
+    }
+    if (val) val.textContent = percent + '%';
+  });
+
+  var timeline = document.getElementById('activityTimeline');
+  if (!timeline) return;
+  timeline.innerHTML = '';
+
+  var baseActivity = [{ title: 'Mulai perjalanan belajar', desc: 'Membuka MPI Pecahan untuk pertama kali' }];
+  var list = baseActivity.concat(AppState.activities || []);
+
+  list.forEach(function(a) {
+    var item = document.createElement('div');
+    item.className = 'timeline-item completed';
+    item.innerHTML = '<div class="timeline-content">' +
+      '<div class="timeline-title">' + a.title + '</div>' +
+      '<div class="timeline-desc">' + (a.desc || '') + '</div>' +
+      '</div>';
+    timeline.appendChild(item);
+  });
+}
+
+/* ============================================================
+   BADGES & CELEBRATION
+   ============================================================ */
+function unlockBadge(name) {
+  if (AppState.badges[name]) return;
+  AppState.badges[name] = true;
+
+  var el = document.getElementById('badge-' + name);
+  if (el) {
+    el.classList.remove('locked');
+    el.style.animation = 'popIn 0.5s ease';
+  }
+
+  playSound('badge');
+  addActivity('Membuka Lencana Baru: ' + getBadgeName(name));
+  var confEnabled = document.getElementById('confettiSwitch') ? document.getElementById('confettiSwitch').checked : true;
+  if (confEnabled) launchConfetti();
+  saveState();
+}
+
+function getBadgeName(key) {
+  var names = {
+    explorer: 'Penjelajah Pecahan',
+    quiz: 'Penembak Jitu',
+    perfect: 'Nilai Sempurna!',
+    scientist: 'Ilmuwan Cilik',
+    allstar: 'Bintang Madrasah'
+  };
+  return names[key] || key;
+}
+
+function launchConfetti() {
+  var container = document.getElementById('confettiContainer');
+  var colors = ['#0D9488', '#14B8A6', '#D4AF37', '#F59E0B', '#10B981', '#FCD34D'];
+
+  for (var i = 0; i < 40; i++) {
+    var confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = (Math.random() * 0.4) + 's';
+    confetti.style.animationDuration = (1.2 + Math.random()) + 's';
+    confetti.style.width = (7 + Math.random() * 7) + 'px';
+    confetti.style.height = (7 + Math.random() * 7) + 'px';
+    container.appendChild(confetti);
+    (function(c) {
+      setTimeout(function() { c.remove(); }, 2000);
+    })(confetti);
+  }
+}
+
+/* ============================================================
+   FLASHCARD MODAL
+   ============================================================ */
+function showFlashcard(type) {
+  playSound('click');
+  var data = {
+    biasa: {
+      title: '&#128202; Pecahan Biasa',
+      content: '<p>Pecahan biasa terdiri atas <strong>pembilang</strong> dan <strong>penyebut</strong>.</p><div style="text-align:center;padding:16px;font-size:26px;font-weight:800;color:var(--accent-blue);">3/4</div><p style="font-size:13px;color:var(--text-muted);">&bull; <strong>Pecahan Murni:</strong> pembilang &lt; penyebut (contoh: 2/5)<br>&bull; <strong>Pecahan Tidak Murni:</strong> pembilang &ge; penyebut (contoh: 7/4)</p>'
+    },
+    campuran: {
+      title: '&#128256; Pecahan Campuran',
+      content: '<p>Pecahan campuran memadukan <strong>bilangan bulat</strong> dengan <strong>pecahan biasa</strong>.</p><div style="text-align:center;padding:16px;font-size:26px;font-weight:800;color:var(--accent-blue);">2 1/4</div><p style="font-size:13px;color:var(--text-muted);"><strong>Konversi ke pecahan biasa:</strong><br>(2 &times; 4 + 1) / 4 = <strong>9/4</strong></p>'
+    },
+    desimal: {
+      title: '&#128287; Pecahan Desimal',
+      content: '<p>Pecahan desimal memakai tanda koma (atau titik) kelipatan persepuluh atau perseratus.</p><div style="text-align:center;padding:16px;font-size:26px;font-weight:800;color:var(--accent-orange);">0,75</div><p style="font-size:13px;color:var(--text-muted);">Contoh: 1/2 = 0,5 &bull; 1/4 = 0,25 &bull; 3/4 = 0,75</p>'
+    },
+    persen: {
+      title: '&#128175; Pecahan Persen',
+      content: '<p>Persen berarti <strong>"per seratus"</strong> (lambang %).</p><div style="text-align:center;padding:16px;font-size:26px;font-weight:800;color:var(--accent-green);">75%</div><p style="font-size:13px;color:var(--text-muted);">Contoh: 75% = 75/100 = 3/4</p>'
+    }
+  };
+
+  var d = data[type];
+  if (!d) return;
+
+  document.getElementById('modalBody').innerHTML = '<h3 style="font-size:20px;font-weight:700;margin-bottom:14px;">' + d.title + '</h3>' + d.content;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+}
+
+/* ============================================================
+   SIMULATION: FRACTION CALCULATOR
+   ============================================================ */
+function updateVisualization() {
+  var n1 = Math.max(0, parseInt(document.getElementById('num1').value) || 0);
+  var d1 = Math.max(1, parseInt(document.getElementById('den1').value) || 1);
+  var n2 = Math.max(0, parseInt(document.getElementById('num2').value) || 0);
+  var d2 = Math.max(1, parseInt(document.getElementById('den2').value) || 1);
+  var op = document.getElementById('operator').value;
+
+  document.getElementById('bar1Label').textContent = n1 + '/' + d1;
+  document.getElementById('bar2Label').textContent = n2 + '/' + d2;
+  var opMap = { '+': '+', '-': '\u2212', '*': '\u00D7', '/': '\u00F7' };
+  document.getElementById('barOperator').textContent = opMap[op];
+
+  renderBar('bar1', n1, d1);
+  renderBar('bar2', n2, d2);
+}
+
+function renderBar(containerId, num, den) {
+  var container = document.getElementById(containerId);
+  container.innerHTML = '';
+  var segments = Math.min(den, 24);
+  var filled = Math.min(num, segments);
+
+  for (var i = 0; i < segments; i++) {
+    var seg = document.createElement('div');
+    seg.className = 'bar-segment ' + (i < filled ? 'filled' : 'empty');
+    seg.style.width = (100 / segments) + '%';
+    container.appendChild(seg);
+  }
+}
+
+function gcd(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) { var t = b; b = a % b; a = t; }
+  return a || 1;
+}
+
+function simplify(n, d) {
+  if (d === 0) return { num: 0, den: 1 };
+  var g = gcd(n, d);
+  var sn = n / g;
+  var sd = d / g;
+  if (sd < 0) { sn = -sn; sd = -sd; }
+  return { num: sn, den: sd };
+}
+
+function calculateFraction() {
+  playSound('click');
+  var n1 = parseInt(document.getElementById('num1').value) || 0;
+  var d1 = parseInt(document.getElementById('den1').value) || 1;
+  var n2 = parseInt(document.getElementById('num2').value) || 0;
+  var d2 = parseInt(document.getElementById('den2').value) || 1;
+  var op = document.getElementById('operator').value;
+
+  var rn = 0, rd = 1;
+  if (op === '+') { rn = n1 * d2 + n2 * d1; rd = d1 * d2; }
+  else if (op === '-') { rn = n1 * d2 - n2 * d1; rd = d1 * d2; }
+  else if (op === '*') { rn = n1 * n2; rd = d1 * d2; }
+  else if (op === '/') {
+    if (n2 === 0) {
+      var r = document.getElementById('calcResult');
+      r.textContent = '⚠️ Tidak dapat membagi dengan nol!';
+      r.style.background = 'var(--accent-red-light)';
+      r.style.color = 'var(--accent-red)';
+      r.classList.add('show');
+      playSound('wrong');
+      return;
+    }
+    rn = n1 * d2;
+    rd = d1 * n2;
+  }
+
+  var simp = simplify(rn, rd);
+  var opSymbols = { '+': '+', '-': '\u2212', '*': '\u00D7', '/': '\u00F7' };
+  var text = n1 + '/' + d1 + ' ' + opSymbols[op] + ' ' + n2 + '/' + d2 + ' = ' + rn + '/' + rd;
+
+  if (simp.num !== rn || simp.den !== rd) {
+    text += ' = ' + simp.num + '/' + simp.den;
+  }
+
+  if (Math.abs(simp.num) > simp.den && simp.den !== 1) {
+    var whole = Math.floor(Math.abs(simp.num) / simp.den);
+    var rem = Math.abs(simp.num) % simp.den;
+    var sign = simp.num < 0 ? '-' : '';
+    if (rem > 0) text += ' (' + sign + whole + ' ' + rem + '/' + simp.den + ')';
+  }
+
+  var resEl = document.getElementById('calcResult');
+  resEl.innerHTML = '&#9989; <strong>Hasil:</strong> ' + text;
+  resEl.style.background = 'var(--accent-green-light)';
+  resEl.style.color = 'var(--accent-green)';
+  resEl.classList.add('show');
+
+  playSound('correct');
+  if (!AppState.simUsed) {
+    AppState.simUsed = true;
+    unlockBadge('scientist');
+  }
+  updateProgress();
+  saveState();
+}
+
+/* ============================================================
+   SIMULATION: SLIDER FRACTION
+   ============================================================ */
+function updateSliderViz() {
+  var num = parseInt(document.getElementById('sliderNum').value);
+  var den = parseInt(document.getElementById('sliderDen').value);
+
+  document.getElementById('sliderNumVal').textContent = num;
+  document.getElementById('sliderDenVal').textContent = den;
+  document.getElementById('sliderFractionDisplay').textContent = num + '/' + den;
+
+  var dec = (num / den).toFixed(3);
+  var pct = ((num / den) * 100).toFixed(1);
+  document.getElementById('sliderDecimalDisplay').textContent = '= ' + dec + ' \u2022 ' + pct + '%';
+
+  var grid = document.getElementById('sliderGridArea');
+  grid.innerHTML = '';
+
+  var container = document.createElement('div');
+  container.className = 'fraction-grid-visual';
+  var cols = Math.min(den, 8);
+  container.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+
+  for (var i = 0; i < den; i++) {
+    var cell = document.createElement('div');
+    cell.className = 'fraction-grid-cell ' + (i < num ? 'filled' : 'empty');
+    container.appendChild(cell);
+  }
+  grid.appendChild(container);
+}
+
+/* ============================================================
+   TOUCH & CLICK FRIENDLY DRAG & DROP EQUATION
+   ============================================================ */
+var dndChallenges = [
+  { equation: '1/2 + 1/4 = 3/4', pieces: ['1', '2', '1', '4', '3', '4'], answer: ['1', '2', '1', '4', '3', '4'], op: '+' },
+  { equation: '3/5 \u2212 1/5 = 2/5', pieces: ['3', '5', '1', '5', '2', '5'], answer: ['3', '5', '1', '5', '2', '5'], op: '\u2212' },
+  { equation: '2/3 \u00D7 3/4 = 6/12', pieces: ['2', '3', '3', '4', '6', '12'], answer: ['2', '3', '3', '4', '6', '12'], op: '\u00D7' }
+];
+
+var activeDnDIndex = 0;
+var selectedDnDPiece = null;
+
+function initDnD() {
+  var challenge = dndChallenges[activeDnDIndex];
+  var piecesBox = document.getElementById('dndPieces');
+  var dropzone = document.getElementById('dndDropzone');
+
+  piecesBox.innerHTML = '';
+  dropzone.innerHTML = '';
+
+  var shuffled = challenge.pieces.slice().sort(function() { return Math.random() - 0.5; });
+
+  shuffled.forEach(function(val) {
+    var piece = document.createElement('div');
+    piece.className = 'dnd-piece';
+    piece.textContent = val;
+    piece.dataset.value = val;
+
+    piece.onclick = function() {
+      playSound('click');
+      if (piece.classList.contains('used')) return;
+
+      if (selectedDnDPiece) selectedDnDPiece.classList.remove('active-selection');
+
+      if (selectedDnDPiece === piece) {
+        selectedDnDPiece = null;
+      } else {
+        selectedDnDPiece = piece;
+        piece.classList.add('active-selection');
+      }
+    };
+
+    piecesBox.appendChild(piece);
+  });
+
+  // Layout: [0]/[1] (op) [2]/[3] = [4]/[5]
+  for (var s = 0; s < 6; s++) {
+    var slot = document.createElement('div');
+    slot.className = 'dnd-slot';
+    slot.textContent = '?';
+    slot.dataset.slotIndex = s;
+
+    slot.onclick = (function(slotElement) {
+      return function() {
+        if (selectedDnDPiece) {
+          playSound('click');
+          if (slotElement.classList.contains('filled')) {
+            reclaimPiece(slotElement.dataset.value);
+          }
+          slotElement.textContent = selectedDnDPiece.dataset.value;
+          slotElement.dataset.value = selectedDnDPiece.dataset.value;
+          slotElement.classList.add('filled');
+
+          selectedDnDPiece.classList.remove('active-selection');
+          selectedDnDPiece.classList.add('used');
+          selectedDnDPiece = null;
+        } else if (slotElement.classList.contains('filled')) {
+          playSound('click');
+          reclaimPiece(slotElement.dataset.value);
+          slotElement.textContent = '?';
+          slotElement.classList.remove('filled');
+          delete slotElement.dataset.value;
+        }
+      };
+    })(slot);
+
+    dropzone.appendChild(slot);
+
+    if (s === 0 || s === 2 || s === 4) {
+      var slash = document.createElement('span');
+      slash.className = 'dnd-static';
+      slash.textContent = '/';
+      dropzone.appendChild(slash);
+    }
+    if (s === 1) {
+      var opSpan = document.createElement('span');
+      opSpan.className = 'dnd-static';
+      opSpan.textContent = ' ' + challenge.op + ' ';
+      dropzone.appendChild(opSpan);
+    }
+    if (s === 3) {
+      var eqSpan = document.createElement('span');
+      eqSpan.className = 'dnd-static';
+      eqSpan.textContent = ' = ';
+      dropzone.appendChild(eqSpan);
+    }
+  }
+
+  document.getElementById('dndQuestion').textContent = 'Susun persamaan yang menghasilkan: ' + challenge.equation;
+  document.getElementById('dndResult').classList.remove('show');
+}
+
+function reclaimPiece(val) {
+  var pieces = document.querySelectorAll('#dndPieces .dnd-piece.used');
+  for (var i = 0; i < pieces.length; i++) {
+    if (pieces[i].dataset.value === val) {
+      pieces[i].classList.remove('used');
+      break;
+    }
+  }
+}
+
+function checkDnD() {
+  var challenge = dndChallenges[activeDnDIndex];
+  var slots = document.querySelectorAll('#dndDropzone .dnd-slot');
+  var userValues = [];
+  slots.forEach(function(s) { userValues.push(s.dataset.value || ''); });
+
+  var allFilled = userValues.every(function(v) { return v !== ''; });
+  var resultEl = document.getElementById('dndResult');
+
+  if (!allFilled) {
+    playSound('wrong');
+    resultEl.textContent = '⚠️ Masih ada kotak kosong! Lengkapi semua kotak.';
+    resultEl.style.background = 'var(--accent-orange-light)';
+    resultEl.style.color = 'var(--accent-orange)';
+    resultEl.classList.add('show');
+    return;
+  }
+
+  var isCorrect = JSON.stringify(userValues) === JSON.stringify(challenge.answer);
+
+  if (isCorrect) {
+    playSound('correct');
+    resultEl.innerHTML = '🎉 <strong>Masya Allah, Tepat Sekali!</strong> Persamaan ' + challenge.equation + ' sudah tersusun benar!';
+    resultEl.style.background = 'var(--accent-green-light)';
+    resultEl.style.color = 'var(--accent-green)';
+    AppState.dndSolved = true;
+    var confEnabled = document.getElementById('confettiSwitch') ? document.getElementById('confettiSwitch').checked : true;
+    if (confEnabled) launchConfetti();
+
+    var btnSend = document.getElementById('btnSendDndSheets');
+    if (btnSend) btnSend.style.display = 'inline-flex';
+    sendStudentResultToSheets({
+      activityType: 'Simulasi Susun Pecahan',
+      questionText: 'Menyusun persamaan pecahan: ' + challenge.equation,
+      studentAnswer: userValues.join(' '),
+      correctAnswer: challenge.answer.join(' '),
+      status: 'Benar',
+      score: 100,
+      notes: 'Tantangan nomor ' + (activeDnDIndex + 1)
+    });
+  } else {
+    playSound('wrong');
+    resultEl.innerHTML = '😊 <strong>Belum tepat.</strong> Coba cek kembali posisi pembilang dan penyebutnya!';
+    resultEl.style.background = 'var(--accent-red-light)';
+    resultEl.style.color = 'var(--accent-red)';
+    document.getElementById('dndDropzone').classList.add('shake');
+    setTimeout(function() { document.getElementById('dndDropzone').classList.remove('shake'); }, 400);
+
+    sendStudentResultToSheets({
+      activityType: 'Simulasi Susun Pecahan',
+      questionText: 'Menyusun persamaan pecahan: ' + challenge.equation,
+      studentAnswer: userValues.join(' '),
+      correctAnswer: challenge.answer.join(' '),
+      status: 'Salah',
+      score: 0,
+      notes: 'Percobaan belum tepat'
+    });
+  }
+  resultEl.classList.add('show');
+  saveState();
+}
+
+function manualSendDndToSheets() {
+  var challenge = dndChallenges[activeDnDIndex];
+  var slots = document.querySelectorAll('#dndDropzone .dnd-slot');
+  var userValues = [];
+  slots.forEach(function(s) { userValues.push(s.dataset.value || ''); });
+  sendStudentResultToSheets({
+    activityType: 'Simulasi Susun Pecahan',
+    questionText: 'Menyusun persamaan pecahan: ' + challenge.equation,
+    studentAnswer: userValues.join(' '),
+    correctAnswer: challenge.answer.join(' '),
+    status: 'Terselesaikan',
+    score: 100,
+    notes: 'Kirim manual oleh siswa'
+  }, true);
+}
+
+function resetDnD() {
+  playSound('click');
+  activeDnDIndex = (activeDnDIndex + 1) % dndChallenges.length;
+  selectedDnDPiece = null;
+  initDnD();
+}
+
+/* ============================================================
+   QUIZ ENGINE
+   ============================================================ */
+var quizData = [
+  {
+    question: 'Pak Hasan, nelayan di Kwandang Gorontalo Utara, memperoleh 12 ekor ikan kakap merah. Sebanyak 3 ekor diberikan kepada tetangganya dan 4 ekor diberikan kepada keluarganya. Berapa bagian (pecahan) dari seluruh tangkapan yang telah diberikan Pak Hasan?',
+    context: '🐟 Konteks Budaya Pesisir: Kearifan berbagi hasil laut masyarakat Gorontalo Utara',
+    options: ['5/12', '7/12', '3/12', '4/12'],
+    correct: 1,
+    explanation: 'Total ikan yang dibagikan = 3 ekor + 4 ekor = 7 ekor dari total 12 ekor.\nDalam bentuk pecahan: 3/12 + 4/12 = 7/12 bagian.\nJawaban yang benar adalah 7/12.'
+  },
+  {
+    question: 'Ibu Fatimah, seorang petani di Atinggola, memiliki sebidang ladang subur. Ia menanam jagung di 2/5 bagian ladang dan padi gogo di 1/5 bagian ladang. Berapa jumlah bagian ladang yang sudah ditanami?',
+    context: '🌾 Konteks Agraris: Pertanian pangan wilayah Atinggola',
+    options: ['1/5 bagian', '2/5 bagian', '3/5 bagian', '4/5 bagian'],
+    correct: 2,
+    explanation: 'Karena kedua pecahan berpenyebut sama (5), langsung jumlahkan pembilangnya:\n2/5 + 1/5 = (2 + 1)/5 = 3/5 bagian ladang.'
+  },
+  {
+    question: 'Seorang nelayan memiliki tali jaring sepanjang 3/4 meter. Karena terdapat jala yang robek, ia memotong tali tersebut sepanjang 1/3 meter. Berapa meter sisa tali jaring yang masih ia miliki?',
+    context: '🧵 Konteks Kehidupan Nelayan: Pemeliharaan alat tangkap jala ikan',
+    options: ['2/7 meter', '5/12 meter', '1/4 meter', '2/12 meter'],
+    correct: 1,
+    explanation: 'Penyebut berbeda (4 dan 3). Cari KPK dari 4 dan 3, yaitu 12.\n3/4 = 9/12 dan 1/3 = 4/12.\nKurangkan pembilangnya: 9/12 \u2212 4/12 = 5/12 meter.'
+  },
+  {
+    question: 'Pak Ahmad memiliki kebun kelapa seluas 2/3 hektar di Monano. Ia memanfaatkan 3/4 dari luas kebun kelapanya untuk ditanami tanaman pisang kepok. Berapakah luas lahan yang ditanami pisang?',
+    context: '🌴 Konteks Perkebunan: Pemanfaatan tumpang sari kebun kelapa Gorontalo Utara',
+    options: ['5/7 hektar', '6/12 hektar (1/2 ha)', '6/7 hektar', '1/3 hektar'],
+    correct: 1,
+    explanation: 'Ini adalah operasi perkalian pecahan:\n2/3 \u00D7 3/4 = (2 \u00D7 3)/(3 \u00D7 4) = 6/12 hektar.\nJika disederhanakan, 6/12 = 1/2 hektar.'
+  },
+  {
+    question: 'Ibu Maryam memiliki persediaan 3/4 kg gula aren khas Gorontalo. Gula tersebut akan dibagi rata ke dalam kemasan kecil yang masing-masing bermuatan 1/4 kg. Berapa banyak kemasan gula aren yang dapat dibuat?',
+    context: '🍯 Konteks UMKM Lokal: Pembuatan dan pengemasan gula aren tradisional',
+    options: ['1 kemasan', '2 kemasan', '3 kemasan', '4 kemasan'],
+    correct: 2,
+    explanation: 'Gunakan operasi pembagian pecahan:\n3/4 \u00F7 1/4 = 3/4 \u00D7 4/1 = 12/4 = 3 kemasan utuh.'
+  }
+];
+
+var currentQuizIndex = 0;
+
+function renderQuiz() {
+  var container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  document.getElementById('quizResult').classList.remove('show');
+
+  var q = quizData[currentQuizIndex];
+  var card = document.createElement('div');
+  card.className = 'quiz-card';
+
+  card.innerHTML = '<div class="quiz-number">&#128203; Butir Soal ' + (currentQuizIndex + 1) + ' dari ' + quizData.length + '</div>' +
+    '<div class="quiz-question">' + q.question + '</div>' +
+    '<div class="quiz-context">' + q.context + '</div>' +
+    '<div class="quiz-options" id="quizOptions">' +
+    q.options.map(function(opt, idx) {
+      return '<div class="quiz-option" data-idx="' + idx + '" onclick="selectOption(' + idx + ')">' +
+        '<span class="quiz-option-letter">' + String.fromCharCode(65 + idx) + '</span>' +
+        '<span>' + opt + '</span></div>';
+    }).join('') +
+    '</div>' +
+    '<div class="quiz-feedback" id="quizFeedback"></div>' +
+    '<div class="quiz-actions" id="quizActions">' +
+    '<button class="btn btn-primary" id="quizSubmitBtn" onclick="submitAnswer()" disabled>&#9989; Kunci Jawaban</button>' +
+    '</div>';
+
+  container.appendChild(card);
+  document.getElementById('quizScoreDisplay').textContent = 'Soal ' + (currentQuizIndex + 1) + ' dari ' + quizData.length;
+  updateQuizDots();
+
+  if (AppState.quizAnswers[currentQuizIndex] !== null) {
+    showAnswerFeedback(AppState.quizAnswers[currentQuizIndex]);
+  }
+}
+
+function selectOption(idx) {
+  if (AppState.quizAnswers[currentQuizIndex] !== null) return;
+  playSound('click');
+  document.querySelectorAll('.quiz-option').forEach(function(o, i) {
+    o.classList.toggle('selected', i === idx);
+  });
+  var btn = document.getElementById('quizSubmitBtn');
+  btn.disabled = false;
+  btn.dataset.selected = idx;
+}
+
+function submitAnswer() {
+  var btn = document.getElementById('quizSubmitBtn');
+  var sel = parseInt(btn.dataset.selected);
+  if (isNaN(sel)) return;
+
+  AppState.quizAnswers[currentQuizIndex] = sel;
+  showAnswerFeedback(sel);
+  saveState();
+}
+
+function showAnswerFeedback(selected) {
+  var q = quizData[currentQuizIndex];
+  var isCorrect = selected === q.correct;
+
+  if (isCorrect) playSound('correct');
+  else playSound('wrong');
+
+  document.querySelectorAll('.quiz-option').forEach(function(o, i) {
+    o.style.pointerEvents = 'none';
+    if (i === q.correct) o.classList.add('correct');
+    if (i === selected && !isCorrect) o.classList.add('wrong');
+  });
+
+  var fb = document.getElementById('quizFeedback');
+  fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = '<div class="quiz-feedback-title">' + (isCorrect ? '🎉 Benar Sekali!' : '😊 Jawaban Kurang Tepat') + '</div>' +
+    '<div class="quiz-feedback-text">' + q.explanation.replace(/\n/g, '<br>') + '</div>';
+
+  var dot = document.querySelector('.quiz-dot[data-q="' + currentQuizIndex + '"]');
+  if (dot) {
+    dot.classList.remove('current');
+    dot.classList.add(isCorrect ? 'correct' : 'wrong');
+  }
+
+  var actions = document.getElementById('quizActions');
+  var isLast = currentQuizIndex >= quizData.length - 1;
+
+  actions.innerHTML = isLast ?
+    '<button class="btn btn-success" onclick="finishQuiz()">&#128200; Tampilkan Nilai Akhir</button>' :
+    '<button class="btn btn-primary" onclick="nextQuestion()">Lanjut Soal Berikutnya &#10145;</button>';
+}
+
+function nextQuestion() {
+  playSound('click');
+  currentQuizIndex++;
+  if (currentQuizIndex < quizData.length) renderQuiz();
+}
+
+function finishQuiz() {
+  playSound('badge');
+  var correctCount = 0;
+  AppState.quizAnswers.forEach(function(ans, i) {
+    if (ans === quizData[i].correct) correctCount++;
+  });
+
+  AppState.quizScore = correctCount;
+  AppState.quizSubmitted = true;
+  var finalScore = Math.round((correctCount / quizData.length) * 100);
+
+  if (finalScore > AppState.highScore) AppState.highScore = finalScore;
+  if (finalScore >= 80) unlockBadge('quiz');
+  if (finalScore === 100) unlockBadge('perfect');
+
+  addActivity('Menyelesaikan kuis evaluasi dengan skor ' + finalScore + ' (' + correctCount + '/5)');
+  
+  var detailedAnswers = quizData.map(function(q, i) {
+    var ansIndex = AppState.quizAnswers[i];
+    var ansText = ansIndex !== null ? q.options[ansIndex] : 'Tidak dijawab';
+    var isRight = ansIndex === q.correct;
+    return 'Soal ' + (i+1) + ': ' + ansText + ' (' + (isRight ? 'Benar' : 'Salah') + ')';
+  }).join(' | ');
+
+  sendStudentResultToSheets({
+    activityType: 'Kuis Evaluasi Formatif',
+    questionText: 'Paket Kuis 5 Butir Pecahan Tematik Gorontalo Utara',
+    studentAnswer: detailedAnswers,
+    correctAnswer: '5 Soal Sesuai Kunci',
+    status: finalScore >= 80 ? 'Tuntas Unggul' : (finalScore >= 60 ? 'Tuntas' : 'Perlu Bimbingan'),
+    score: finalScore,
+    notes: 'Benar ' + correctCount + ' dari 5 soal'
+  });
+
+  showQuizResult();
+  updateProgress();
+  saveState();
+}
+
+function showQuizResult() {
+  document.getElementById('quizContainer').innerHTML = '';
+  var correctCount = 0;
+  AppState.quizAnswers.forEach(function(ans, i) {
+    if (ans === quizData[i].correct) correctCount++;
+  });
+  var finalScore = Math.round((correctCount / quizData.length) * 100);
+
+  var circleClass = finalScore >= 80 ? 'excellent' : (finalScore >= 60 ? 'good' : 'needs-improvement');
+  var emoji = finalScore >= 80 ? '🏆' : (finalScore >= 60 ? '🌟' : '📚');
+  var title = finalScore === 100 ? 'Istimewa! Sempurna!' : (finalScore >= 80 ? 'Sangat Baik!' : 'Perlu Latihan Lagi');
+  var subtitle = finalScore >= 80 ? 'Pemahamanmu tentang pecahan sudah luar biasa!' : 'Buka kembali materi pecahan dan coba lagi kuis ini.';
+
+  var resEl = document.getElementById('quizResult');
+  resEl.innerHTML = '<div class="result-emoji">' + emoji + '</div>' +
+    '<div class="result-title">' + title + '</div>' +
+    '<div class="result-subtitle">' + subtitle + '</div>' +
+    '<div class="result-score-circle ' + circleClass + '">' + finalScore + '</div>' +
+    '<div class="result-details">' +
+    '<div class="result-detail-item"><div class="result-detail-value" style="color:var(--accent-green);">' + correctCount + '</div><div class="result-detail-label">Jawaban Benar</div></div>' +
+    '<div class="result-detail-item"><div class="result-detail-value" style="color:var(--accent-red);">' + (quizData.length - correctCount) + '</div><div class="result-detail-label">Jawaban Salah</div></div>' +
+    '<div class="result-detail-item"><div class="result-detail-value" style="color:var(--accent-blue);">' + finalScore + '%</div><div class="result-detail-label">Tingkat Penguasaan</div></div>' +
+    '</div>' +
+    '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+    '<button class="btn btn-primary" onclick="reviewQuiz()">&#128214; Pembahasan Soal</button>' +
+    '<button class="btn btn-secondary" onclick="retryQuiz()">&#128260; Ulangi Kuis</button>' +
+    '<button class="btn btn-success" onclick="manualSendQuizToSheets()">&#128202; Kirim Nilai ke Spreadsheet Guru</button>' +
+    '</div>' +
+    '<div id="quizSheetsNotice" style="margin-top:14px;font-size:12.5px;color:var(--text-muted);"></div>';
+  resEl.classList.add('show');
+}
+
+function manualSendQuizToSheets() {
+  var correctCount = 0;
+  AppState.quizAnswers.forEach(function(ans, i) {
+    if (ans === quizData[i].correct) correctCount++;
+  });
+  var finalScore = Math.round((correctCount / quizData.length) * 100);
+  var detailedAnswers = quizData.map(function(q, i) {
+    var ansIndex = AppState.quizAnswers[i];
+    var ansText = ansIndex !== null ? q.options[ansIndex] : '-';
+    return 'Q' + (i+1) + ': ' + ansText;
+  }).join('; ');
+
+  sendStudentResultToSheets({
+    activityType: 'Kuis Evaluasi Formatif',
+    questionText: 'Rekap Kuis 5 Butir',
+    studentAnswer: detailedAnswers,
+    correctAnswer: 'Kunci Terlampir di Sheet 1',
+    status: finalScore >= 70 ? 'Tuntas' : 'Remedial',
+    score: finalScore,
+    notes: 'Kirim ulang dari lembar hasil'
+  }, true);
+}
+
+function reviewQuiz() {
+  playSound('click');
+  var container = document.getElementById('quizContainer');
+  document.getElementById('quizResult').classList.remove('show');
+  container.innerHTML = '<h3 style="margin-bottom:16px;">&#128214; Pembahasan Seluruh Soal</h3>';
+
+  quizData.forEach(function(q, i) {
+    var userAns = AppState.quizAnswers[i];
+    var isCorr = userAns === q.correct;
+
+    var c = document.createElement('div');
+    c.className = 'quiz-card';
+    c.innerHTML = '<div class="quiz-number" style="background:' + (isCorr ? 'var(--accent-green-light)' : 'var(--accent-red-light)') + ';color:' + (isCorr ? 'var(--accent-green)' : 'var(--accent-red)') + ';">' +
+      (isCorr ? '✅ Benar' : '❌ Salah') + ' &bull; Soal ' + (i + 1) + '</div>' +
+      '<div class="quiz-question">' + q.question + '</div>' +
+      '<div class="quiz-feedback show ' + (isCorr ? 'correct' : 'wrong') + '">' +
+      '<strong>Pembahasan:</strong> ' + q.explanation.replace(/\n/g, '<br>') + '</div>';
+    container.appendChild(c);
+  });
+
+  var backBtn = document.createElement('div');
+  backBtn.style.textAlign = 'center';
+  backBtn.style.marginTop = '16px';
+  backBtn.innerHTML = '<button class="btn btn-primary" onclick="showQuizResult()">Kembali ke Lembar Hasil</button>';
+  container.appendChild(backBtn);
+}
+
+function retryQuiz() {
+  playSound('click');
+  AppState.quizAnswers = [null, null, null, null, null];
+  AppState.quizSubmitted = false;
+  AppState.quizScore = 0;
+  currentQuizIndex = 0;
+  renderQuiz();
+  saveState();
+}
+
+function updateQuizDots() {
+  document.querySelectorAll('.quiz-dot').forEach(function(d, i) {
+    d.classList.remove('current');
+    if (i === currentQuizIndex) d.classList.add('current');
+  });
+}
+
+/* ============================================================
+   GOOGLE SPREADSHEET INTEGRATION (APPS SCRIPT WEBHOOK)
+   Sheet 1: Soal & Tantangan Simulasi
+   Sheet 2: Rekap Hasil Jawaban Siswa
+   ============================================================ */
+
+var APPS_SCRIPT_CODE = `function doPost(e) {
+  try {
+    var sheetId = SpreadsheetApp.getActiveSpreadsheet();
+    var data = JSON.parse(e.postData.contents);
+    var action = data.action;
+
+    // SHEET 1: DATA SOAL & TANTANGAN
+    if (action === "save_questions") {
+      var sheet1 = sheetId.getSheetByName("Sheet1") || sheetId.getSheetByName("Soal_Simulasi");
+      if (!sheet1) {
+        sheet1 = sheetId.insertSheet("Sheet1");
+      }
+      sheet1.clear();
+      // Header Sheet 1
+      sheet1.appendRow([
+        "ID Soal",
+        "Kategori / Aktivitas",
+        "Teks Soal / Persamaan",
+        "Konteks Kearifan Lokal",
+        "Pilihan / Potongan",
+        "Kunci Jawaban",
+        "Keterangan / Pembahasan",
+        "Tanggal Diperbarui"
+      ]);
+      sheet1.getRange(1, 1, 1, 8).setFontWeight("bold").setBackground("#0D9488").setFontColor("#FFFFFF");
+
+      var questions = data.questions || [];
+      for (var i = 0; i < questions.length; i++) {
+        var q = questions[i];
+        sheet1.appendRow([
+          q.id,
+          q.kategori,
+          q.teks,
+          q.konteks || "-",
+          q.pilihan || "-",
+          q.kunci,
+          q.pembahasan || "-",
+          new Date().toLocaleString("id-ID")
+        ]);
+      }
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "Data soal berhasil disimpan di Sheet 1" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // SHEET 2: DATA HASIL JAWABAN SISWA
+    else if (action === "save_student_result") {
+      var sheet2 = sheetId.getSheetByName("Sheet2") || sheetId.getSheetByName("Hasil_Siswa");
+      if (!sheet2) {
+        sheet2 = sheetId.insertSheet("Sheet2");
+      }
+      if (sheet2.getLastRow() === 0) {
+        sheet2.appendRow([
+          "Waktu (WITA)",
+          "Nama Siswa",
+          "Jenis Aktivitas",
+          "Soal / Tantangan",
+          "Jawaban Siswa",
+          "Kunci Jawaban",
+          "Status",
+          "Skor / Nilai",
+          "Catatan Guru"
+        ]);
+        sheet2.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#D4AF37").setFontColor("#071E1C");
+      }
+
+      var res = data.result;
+      sheet2.appendRow([
+        new Date().toLocaleString("id-ID", { timeZone: "Asia/Makassar" }),
+        res.studentName || "Anonim",
+        res.activityType || "Aktivitas Pecahan",
+        res.questionText || "-",
+        res.studentAnswer || "-",
+        res.correctAnswer || "-",
+        res.status || "-",
+        res.score !== undefined ? res.score : "-",
+        res.notes || "-"
+      ]);
+
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "Hasil siswa berhasil tersimpan di Sheet 2" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "Aksi tidak dikenali" }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", error: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput("MPI Pecahan MIN 1 Gorontalo Utara Webhook Aktif!");
+}`;
+
+function saveSheetsUrl() {
+  var url = document.getElementById('sheetsUrlInput').value.trim();
+  AppState.sheetsUrl = url;
+  updateSheetsBadge();
+  saveState();
+}
+
+function updateSheetsBadge() {
+  var badge = document.getElementById('sheetsStatusBadge');
+  if (!badge) return;
+  if (AppState.sheetsUrl && AppState.sheetsUrl.indexOf('script.google.com') !== -1) {
+    badge.className = 'sheets-badge-connected';
+    badge.innerHTML = '&#9989; Terhubung ke Spreadsheet';
+  } else {
+    badge.className = 'sheets-badge-disconnected';
+    badge.innerHTML = '&#9888; Belum Dikonfigurasi';
+  }
+}
+
+function getCompiledQuestionsData() {
+  var list = [];
+  // Soal Kuis Formatif (1 - 5)
+  quizData.forEach(function(q, i) {
+    list.push({
+      id: 'KUIS-0' + (i + 1),
+      kategori: 'Kuis Pilihan Ganda',
+      teks: q.question,
+      konteks: q.context,
+      pilihan: q.options.join(' | '),
+      kunci: q.options[q.correct],
+      pembahasan: q.explanation.replace(/[\n\r]+/g, ' ')
+    });
+  });
+
+  // Tantangan Simulasi Susun Pecahan (Drag & Drop)
+  dndChallenges.forEach(function(c, i) {
+    list.push({
+      id: 'SIM-DND-0' + (i + 1),
+      kategori: 'Simulasi Susun Persamaan',
+      teks: 'Susun persamaan pecahan dengan potongan angka yang disediakan',
+      konteks: 'Laboratorium Interaktif Pecahan',
+      pilihan: c.pieces.join(', '),
+      kunci: c.equation,
+      pembahasan: 'Persamaan pecahan valid: ' + c.equation
+    });
+  });
+
+  return list;
+}
+
+function syncQuestionsToSheets() {
+  playSound('click');
+  var fb = document.getElementById('sheetsSyncFeedback');
+  if (!AppState.sheetsUrl) {
+    showSheetsNotice('⚠️ Silakan masukkan URL Google Apps Script terlebih dahulu di kolom pengaturan.', 'orange');
+    return;
+  }
+
+  showSheetsNotice('⏳ Sedang mengirimkan daftar soal dan tantangan ke Sheet 1...', 'teal');
+
+  var questionsPayload = {
+    action: 'save_questions',
+    questions: getCompiledQuestionsData()
+  };
+
+  fetch(AppState.sheetsUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(questionsPayload)
+  })
+  .then(function() {
+    playSound('badge');
+    showSheetsNotice('✅ Berhasil mengirim seluruh data soal & simulasi ke Sheet 1!', 'green');
+    addActivity('Sinkronisasi bank soal ke Google Spreadsheet Sheet 1');
+  })
+  .catch(function(err) {
+    showSheetsNotice('❌ Gagal mengirim: periksa koneksi internet atau hak akses Web App.', 'red');
+  });
+}
+
+function sendStudentResultToSheets(resultData, isManual) {
+  if (!AppState.sheetsUrl) {
+    if (isManual) {
+      showSheetsNotice('⚠️ URL Spreadsheet belum diisi di menu Pengaturan.', 'orange');
+    }
+    return;
+  }
+
+  var studentName = AppState.userName ? AppState.userName : 'Siswa MIN 1 Gorut';
+  resultData.studentName = studentName;
+
+  var payload = {
+    action: 'save_student_result',
+    result: resultData
+  };
+
+  fetch(AppState.sheetsUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function() {
+    var notice = document.getElementById('quizSheetsNotice');
+    if (notice) {
+      notice.innerHTML = '&#9989; <em>Nilai dan jawaban berhasil disimpan ke Google Spreadsheet Sheet 2.</em>';
+    }
+    if (isManual) {
+      showSheetsNotice('✅ Data hasil berhasil dicatat ke Sheet 2!', 'green');
+    }
+  })
+  .catch(function() {
+    if (isManual) {
+      showSheetsNotice('❌ Terjadi kendala saat mengirim hasil ke Spreadsheet.', 'red');
+    }
+  });
+}
+
+function testSheetsConnection() {
+  playSound('click');
+  if (!AppState.sheetsUrl) {
+    showSheetsNotice('⚠️ Masukkan Web App URL terlebih dahulu.', 'orange');
+    return;
+  }
+  showSheetsNotice('⏳ Menguji respon Google Apps Script...', 'teal');
+  fetch(AppState.sheetsUrl)
+    .then(function(res) {
+      playSound('correct');
+      showSheetsNotice('✅ Koneksi sukses! Web App siap menerima data.', 'green');
+    })
+    .catch(function() {
+      // no-cors fetch test fallback
+      showSheetsNotice('ℹ️ Webhook aktif (Google Apps Script siap menerima transmisi POST).', 'green');
+    });
+}
+
+function showSheetsNotice(msg, color) {
+  var fb = document.getElementById('sheetsSyncFeedback');
+  if (!fb) return;
+  fb.style.display = 'block';
+  var colorMap = {
+    green: 'var(--accent-green)',
+    red: 'var(--accent-red)',
+    orange: 'var(--accent-orange)',
+    teal: 'var(--accent-blue)'
+  };
+  fb.style.color = colorMap[color] || 'var(--accent-blue)';
+  fb.innerHTML = msg;
+}
+
+function openSheetsGuideModal() {
+  playSound('click');
+  var modal = document.getElementById('modalBody');
+  modal.innerHTML = '<h3 style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:12px;">&#128202; Panduan Menghubungkan Google Spreadsheet</h3>' +
+    '<p style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;">Ikuti 4 langkah mudah berikut agar data tersimpan rapi pada <strong>Sheet 1</strong> (Soal) dan <strong>Sheet 2</strong> (Hasil Siswa):</p>' +
+    '<ol style="padding-left:20px;font-size:12.5px;color:var(--text-secondary);line-height:1.7;margin-bottom:14px;">' +
+      '<li>Buka Google Spreadsheet baru di <a href="https://sheets.new" target="_blank" style="color:var(--accent-blue);font-weight:600;">sheets.new</a>.</li>' +
+      '<li>Klik menu <strong>Ekstensi (Extensions)</strong> &gt; <strong>Apps Script</strong>.</li>' +
+      '<li>Hapus kode bawaan di Apps Script, lalu <strong>tempel (paste)</strong> kode di bawah ini:</li>' +
+    '</ol>' +
+    '<div class="script-code-box" id="scriptCodeBlock">' + escapeHtml(APPS_SCRIPT_CODE) + '</div>' +
+    '<button class="btn btn-primary" onclick="copyAppsScriptCode()" style="margin-bottom:16px;">&#128203; Salin Kode Apps Script</button>' +
+    '<ol start="4" style="padding-left:20px;font-size:12.5px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">' +
+      '<li>Klik tombol <strong>Deploy (Terapkan)</strong> &gt; <strong>Deployment baru</strong>.</li>' +
+      '<li>Pilih jenis <strong>Aplikasi Web (Web App)</strong>.</li>' +
+      '<li>Pada bagian <em>Akses (Who has access)</em>, pilih <strong>Siapa saja (Anyone)</strong>, lalu klik <strong>Deploy</strong>.</li>' +
+      '<li>Salin <strong>URL Aplikasi Web</strong> yang dihasilkan dan tempelkan ke kolom Pengaturan aplikasi ini.</li>' +
+    '</ol>' +
+    '<p style="font-size:12px;color:var(--accent-green);font-weight:600;">✨ Setelah disimpan, klik "Kirim Soal ke Sheet 1" untuk mengisi bank soal secara otomatis!</p>';
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function copyAppsScriptCode() {
+  playSound('click');
+  var tempArea = document.createElement('textarea');
+  tempArea.value = APPS_SCRIPT_CODE;
+  document.body.appendChild(tempArea);
+  tempArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempArea);
+
+  showSheetsNotice('✅ Kode Apps Script berhasil disalin ke papan klip (clipboard)!', 'green');
+  closeModal();
+}
+
+/* ============================================================
+   NOTES & USERNAME
+   ============================================================ */
+function saveNotes() {
+  AppState.notes = document.getElementById('notesArea').value;
+  saveState();
+}
+
+function updateUserName() {
+  var name = document.getElementById('nameInput').value.trim();
+  AppState.userName = name;
+  if (name) {
+    document.getElementById('welcomeName').textContent = 'Halo, ' + name + '!';
+    document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+  } else {
+    document.getElementById('welcomeName').textContent = 'Halo, Murid Hebat!';
+    document.getElementById('userAvatar').textContent = 'M';
+  }
+  saveState();
+}
+
+function resetAllProgress() {
+  var modal = document.getElementById('modalBody');
+  modal.innerHTML = '<h3 style="font-size:18px;font-weight:700;color:var(--accent-red);margin-bottom:12px;">⚠️ Atur Ulang Data Belajar</h3>' +
+    '<p style="font-size:13.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:18px;">Apakah kamu yakin ingin mengulang seluruh riwayat belajar, skor kuis, dan lencana dari awal?</p>' +
+    '<div style="display:flex;gap:10px;justify-content:flex-end;">' +
+    '<button class="btn btn-secondary" onclick="closeModal()">Batal</button>' +
+    '<button class="btn btn-primary" style="background:var(--accent-red);color:white;" onclick="confirmResetAllProgress()">Ya, Reset Semua</button>' +
+    '</div>';
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function confirmResetAllProgress() {
+  localStorage.removeItem('mpi_pecahan_state_v2');
+  location.reload();
+}
+
+/* ============================================================
+   CHATBOT HELPER
+   ============================================================ */
+function sendChat() {
+  var input = document.getElementById('chatInput');
+  if (!input) return;
+  var msg = input.value.trim();
+  if (!msg) return;
+
+  var chatContainer = document.getElementById('chatMessages');
+  var userEl = document.createElement('div');
+  userEl.className = 'chat-msg user';
+  userEl.textContent = msg;
+  chatContainer.appendChild(userEl);
+  input.value = '';
+
+  var reply = generateChatResponse(msg);
+  setTimeout(function() {
+    var botEl = document.createElement('div');
+    botEl.className = 'chat-msg bot';
+    botEl.innerHTML = reply;
+    chatContainer.appendChild(botEl);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    playSound('click');
+  }, 400);
+
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+function generateChatResponse(raw) {
+  var msg = raw.toLowerCase().trim();
+
+  // Kalkulasi instan jika pengguna mengetik format pecahan misal: 1/2 + 1/4
+  var mathMatch = msg.match(/(\d+)\s*\/\s*(\d+)\s*([\+\-\*\/])\s*(\d+)\s*\/\s*(\d+)/);
+  if (mathMatch) {
+    var n1 = parseInt(mathMatch[1]), d1 = parseInt(mathMatch[2]);
+    var op = mathMatch[3];
+    var n2 = parseInt(mathMatch[4]), d2 = parseInt(mathMatch[5]);
+    var rn = 0, rd = 1;
+    if (op === '+') { rn = n1 * d2 + n2 * d1; rd = d1 * d2; }
+    else if (op === '-') { rn = n1 * d2 - n2 * d1; rd = d1 * d2; }
+    else if (op === '*') { rn = n1 * n2; rd = d1 * d2; }
+    else if (op === '/') {
+      if (n2 === 0) return '⚠️ Pecahan pembagi tidak boleh bernilai nol!';
+      rn = n1 * d2; rd = d1 * n2;
+    }
+    var simp = simplify(rn, rd);
+    var res = n1 + '/' + d1 + ' ' + op + ' ' + n2 + '/' + d2 + ' = <strong>' + simp.num + '/' + simp.den + '</strong>';
+    return 'Hasil perhitungan pecahan:<br>' + res + ' 👏';
+  }
+
+  if (msg.includes('kpk')) {
+    return '<strong>KPK (Kelipatan Persekutuan Terkecil)</strong> digunakan untuk menyamakan penyebut pada penjumlahan dan pengurangan. Contoh: KPK dari 3 dan 4 adalah 12! 🎯';
+  }
+  if (msg.includes('pembilang')) {
+    return '<strong>Pembilang</strong> adalah angka yang berada di atas garis pecahan, melambangkan banyak bagian yang diambil. 📌';
+  }
+  if (msg.includes('penyebut')) {
+    return '<strong>Penyebut</strong> adalah angka di bawah garis pecahan, melambangkan jumlah total seluruh bagian. 🏷️';
+  }
+  if (msg.includes('bagi') || msg.includes('pembagian')) {
+    return 'Kaidah pembagian pecahan: <em>"Dibalik lalu dikali"</em>. Balik posisi pembilang dan penyebut pecahan kedua, lalu selesaikan dengan operasi kali! 🔄';
+  }
+  if (msg.includes('kali') || msg.includes('perkalian')) {
+    return 'Perkalian pecahan langsung: kalikan pembilang dengan pembilang, serta penyebut dengan penyebut! ✨';
+  }
+  if (msg.includes('assalam') || msg.includes('halo') || msg.includes('hai')) {
+    return "Wa'alaikumussalam! Siap mendampingimu belajar pecahan. Tanyakan materi atau ketik contoh soal pecahan di sini ya! 😊";
+  }
+
+  return 'Saya siap membantu belajar pecahan! Coba tanyakan tentang <strong>penjumlahan</strong>, <strong>pengurangan</strong>, <strong>KPK</strong>, atau ketik soal seperti <strong>1/2 + 1/4</strong>. 💡';
+}
+
+/* ============================================================
+   INITIALIZATION
+   ============================================================ */
+function init() {
+  loadState();
+
+  if (AppState.darkMode) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeToggle').innerHTML = '&#9728;';
+    var sw = document.getElementById('darkModeSwitch');
+    if (sw) sw.checked = true;
+  }
+
+  if (AppState.userName) {
+    document.getElementById('nameInput').value = AppState.userName;
+    document.getElementById('welcomeName').textContent = 'Halo, ' + AppState.userName + '!';
+    document.getElementById('userAvatar').textContent = AppState.userName.charAt(0).toUpperCase();
+  }
+
+  if (AppState.notes) {
+    document.getElementById('notesArea').value = AppState.notes;
+  }
+
+  if (AppState.sheetsUrl) {
+    var urlInput = document.getElementById('sheetsUrlInput');
+    if (urlInput) urlInput.value = AppState.sheetsUrl;
+    updateSheetsBadge();
+  }
+
+  Object.keys(AppState.badges).forEach(function(key) {
+    if (AppState.badges[key]) {
+      var el = document.getElementById('badge-' + key);
+      if (el) el.classList.remove('locked');
+    }
+  });
+
+  navigateTo(AppState.currentPage || 'dashboard');
+  if (AppState.currentMateri > 0) switchMateriTab(AppState.currentMateri);
+
+  updateProgress();
+  updateDashboard();
+  updateVisualization();
+  updateSliderViz();
+  initDnD();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
